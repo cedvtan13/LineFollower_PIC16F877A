@@ -179,7 +179,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25
 [v _Kp `f ~T0 @X0 1 e ]
 [i _Kp
--> .1.8 `f
+-> .2.2 `f
 ]
 "26
 [v _Ki `f ~T0 @X0 1 e ]
@@ -189,7 +189,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "27
 [v _Kd `f ~T0 @X0 1 e ]
 [i _Kd
--> .30.0 `f
+-> .35.0 `f
 ]
 "38
 [v _sensor_min `us ~T0 @X0 -> 8 `i e ]
@@ -373,13 +373,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _abs_error `f ~T0 @X0 1 a ]
 [e = _abs_error ? < _error -> -> 0 `i `f : -U _error _error ]
 "94
-[e $ ! < _abs_error -> .3.0 `f 129  ]
+[e $ ! < _abs_error -> .2.0 `f 129  ]
 [e = _error -> -> 0 `i `f ]
 [e :U 129 ]
 "97
 [e = _derivative - _error _last_error ]
 "98
-[e = _filtered_derivative + * _filtered_derivative -> .0.3 `f * _derivative -> .0.7 `f ]
+[e = _filtered_derivative + * _filtered_derivative -> .0.8 `f * _derivative -> .0.2 `f ]
 "101
 [v _kp_scale `f ~T0 @X0 1 a ]
 [e = _kp_scale -> .1.0 `f ]
@@ -390,7 +390,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! < _abs_error -> .15.0 `f 130  ]
 {
 "105
-[e = _kp_scale -> .0.5 `f ]
+[e = _kp_scale -> .0.4 `f ]
 "106
 }
 [e $U 131  ]
@@ -398,7 +398,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! > _abs_error -> .35.0 `f 132  ]
 {
 "107
-[e = _kp_scale -> .1.7 `f ]
+[e = _kp_scale -> .1.8 `f ]
 "108
 [e = _speed_drop_factor -> .1.6 `f ]
 "109
@@ -416,120 +416,120 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! < _adjustment -U -> .145.0 `f 134  ]
 [e = _adjustment -U -> .145.0 `f ]
 [e :U 134 ]
-"117
+"116
 [v _dynamic_speed `s ~T0 @X0 1 a ]
 [e = _dynamic_speed -> - -> 85 `i -> -> * _abs_error _speed_drop_factor `s `i `s ]
-"118
+"117
 [e $ ! < -> _dynamic_speed `i -> 30 `i 135  ]
 [e = _dynamic_speed -> -> 30 `i `s ]
 [e :U 135 ]
-"120
+"119
 [e ( _set_motors (2 , -> - -> _dynamic_speed `i -> -> _adjustment `s `i `s -> + -> _dynamic_speed `i -> -> _adjustment `s `i `s ]
-"121
+"120
 [e = _last_error _error ]
-"122
+"121
 }
 [e $U 136  ]
 [e :U 128 ]
 {
-"123
+"122
 [e = _RD2 -> -> 0 `i `b ]
-"124
+"123
 [e $ ! == -> _line_lost_timer `ui -> -> 0 `i `ui 137  ]
 {
-"125
+"124
 [e ( _set_motors (2 , -> -U -> 30 `i `s -> -U -> 30 `i `s ]
-"126
+"125
 [e ( __delay (1 -> * -> -> 8 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"127
+"126
 }
 [e :U 137 ]
-"129
+"128
 [e ++ _line_lost_timer -> -> 1 `i `us ]
-"130
+"129
 [e $ ! > -> _line_lost_timer `ui -> -> 600 `i `ui 138  ]
 {
 [e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
 [e $U 120  ]
 }
 [e :U 138 ]
-"132
+"131
 [e $ ! && < -> _line_lost_timer `ui -> -> 150 `i `ui && < _last_error -> .15.0 `f > _last_error -U -> .15.0 `f 139  ]
 {
-"133
+"132
 [e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
-"134
+"133
 }
 [e $U 140  ]
 [e :U 139 ]
 {
-"135
+"134
 [e $ ! < _last_error -U -> .5.0 `f 141  ]
 [e ( _set_motors (2 , -> -> 80 `i `s -> -U -> 80 `i `s ]
 [e $U 142  ]
-"136
+"135
 [e :U 141 ]
 [e $ ! > _last_error -> .5.0 `f 143  ]
 [e ( _set_motors (2 , -> -U -> 80 `i `s -> -> 80 `i `s ]
 [e $U 144  ]
-"137
+"136
 [e :U 143 ]
 [e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
 [e :U 144 ]
 [e :U 142 ]
-"138
+"137
 }
 [e :U 140 ]
-"139
+"138
 }
 [e :U 136 ]
-"140
+"139
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
-"141
+"140
 }
 [e :U 118 ]
 [e $U 119  ]
 [e :U 120 ]
-"142
+"141
 }
 [e :U 103 ]
 [e $U 104  ]
 [e :U 105 ]
-"143
+"142
 [e :UE 99 ]
 }
-"145
+"144
 [v _init_hardware `(v ~T0 @X0 1 ef ]
 {
 [e :U _init_hardware ]
 [f ]
-"146
+"145
 [e = _PORTC -> -> 255 `i `uc ]
 [e = _TRISA -> -> 255 `i `uc ]
 [e = _TRISE -> -> 7 `i `uc ]
 [e = _TRISB -> -> 193 `i `uc ]
 [e = _TRISC -> -> 0 `i `uc ]
 [e = _TRISD -> -> 0 `i `uc ]
-"147
+"146
 [e = _ADCON1 -> -> 128 `i `uc ]
 [e = _ADCON0 -> -> 129 `i `uc ]
-"148
+"147
 [e = _PR2 -> -> 255 `i `uc ]
 [e = _CCP1CON -> -> 12 `i `uc ]
 [e = _CCP2CON -> -> 12 `i `uc ]
 [e = _T2CON -> -> 4 `i `uc ]
-"149
+"148
 [e = _CCPR1L -> -> 255 `i `uc ]
 [e = _CCPR2L -> -> 255 `i `uc ]
-"150
+"149
 [e :UE 145 ]
 }
-"152
+"151
 [v _calibrate_sensors `(v ~T0 @X0 1 ef ]
 {
 [e :U _calibrate_sensors ]
 [f ]
-"153
+"152
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -544,7 +544,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `i -> 8 `i 147  ]
 [e :U 148 ]
 }
-"154
+"153
 {
 [v _t `us ~T0 @X0 1 a ]
 [e = _t -> -> 0 `i `us ]
@@ -552,7 +552,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 151  ]
 [e :U 150 ]
 {
-"155
+"154
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -560,35 +560,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 154  ]
 [e :U 153 ]
 {
-"156
+"155
 [v _val `us ~T0 @X0 1 a ]
 [e = _val ( _read_adc (1 _i ]
-"157
+"156
 [e $ ! < -> _val `ui -> *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux `ui 156  ]
 [e = *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux _val ]
 [e :U 156 ]
-"158
+"157
 [e $ ! > -> _val `ui -> *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux `ui 157  ]
 [e = *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux _val ]
 [e :U 157 ]
-"159
+"158
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 8 `i 153  ]
 [e :U 154 ]
 }
-"160
+"159
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
 [e $ ! == % -> _t `ui -> -> 25 `i `ui -> -> 0 `i `ui 158  ]
 [e = _RD2 ! _RD2 ]
 [e :U 158 ]
-"161
+"160
 }
 [e ++ _t -> -> 1 `i `us ]
 [e $ < -> _t `ui -> -> 400 `i `ui 150  ]
 [e :U 151 ]
 }
-"162
+"161
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -602,96 +602,96 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ < -> _i `i -> 8 `i 159  ]
 [e :U 160 ]
 }
-"163
+"162
 [e :UE 146 ]
 }
-"165
+"164
 [v _read_adc `(us ~T0 @X0 1 ef1`uc ]
 {
 [e :U _read_adc ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-"166
+"165
 [e =& _ADCON0 -> -> 199 `i `Vuc ]
 [e =| _ADCON0 -> << -> _channel `i -> 3 `i `Vuc ]
-"167
+"166
 [e ( __delay (1 -> * -> -> 20 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
 [e = _GO_nDONE -> -> 1 `i `b ]
-"168
+"167
 [e $U 163  ]
 [e :U 164 ]
 [e :U 163 ]
 [e $ _GO_nDONE 164  ]
 [e :U 165 ]
-"169
+"168
 [e ) -> | << -> _ADRESH `i -> 8 `i -> _ADRESL `i `us ]
 [e $UE 162  ]
-"170
+"169
 [e :UE 162 ]
 }
-"172
+"171
 [v _set_motors `(v ~T0 @X0 1 ef2`s`s ]
 {
 [e :U _set_motors ]
 [v _left_pwm `s ~T0 @X0 1 r1 ]
 [v _right_pwm `s ~T0 @X0 1 r2 ]
 [f ]
-"173
+"172
 [e $ ! >= -> _left_pwm `i -> 0 `i 167  ]
 {
-"174
+"173
 [e = _RC0 -> -> 1 `i `b ]
-"175
+"174
 [e $ ! > -> _left_pwm `i -> 145 `i 168  ]
 [e = _left_pwm -> -> 145 `i `s ]
 [e :U 168 ]
-"176
+"175
 [e = _CCPR1L -> - -> 255 `i -> _left_pwm `i `uc ]
-"177
+"176
 }
 [e $U 169  ]
 [e :U 167 ]
 {
-"178
+"177
 [e = _RC0 -> -> 0 `i `b ]
 [e = _left_pwm -> -U -> _left_pwm `i `s ]
-"179
+"178
 [e $ ! > -> _left_pwm `i -> 145 `i 170  ]
 [e = _left_pwm -> -> 145 `i `s ]
 [e :U 170 ]
-"180
+"179
 [e = _CCPR1L -> _left_pwm `uc ]
-"181
+"180
 }
 [e :U 169 ]
-"182
+"181
 [e $ ! >= -> _right_pwm `i -> 0 `i 171  ]
 {
-"183
+"182
 [e = _RC4 -> -> 1 `i `b ]
-"184
+"183
 [e $ ! > -> _right_pwm `i -> 145 `i 172  ]
 [e = _right_pwm -> -> 145 `i `s ]
 [e :U 172 ]
-"185
+"184
 [e = _CCPR2L -> - -> 255 `i -> _right_pwm `i `uc ]
-"186
+"185
 }
 [e $U 173  ]
 [e :U 171 ]
 {
-"187
+"186
 [e = _RC4 -> -> 0 `i `b ]
 [e = _right_pwm -> -U -> _right_pwm `i `s ]
-"188
+"187
 [e $ ! > -> _right_pwm `i -> 145 `i 174  ]
 [e = _right_pwm -> -> 145 `i `s ]
 [e :U 174 ]
-"189
+"188
 [e = _CCPR2L -> _right_pwm `uc ]
-"190
+"189
 }
 [e :U 173 ]
-"191
+"190
 [e :UE 166 ]
 }

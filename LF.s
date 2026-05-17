@@ -362,8 +362,8 @@ __pidataBANK0:
 ;initializer for _Kd
 	retlw	0x0
 	retlw	0x0
-	retlw	0xf0
-	retlw	0x41
+	retlw	0xc
+	retlw	0x42
 
 psect	idataBANK1,class=CODE,space=0,delta=2,noexec
 global __pidataBANK1
@@ -371,10 +371,10 @@ __pidataBANK1:
 	line	25
 
 ;initializer for _Kp
-	retlw	0x66
-	retlw	0x66
-	retlw	0xe6
-	retlw	0x3f
+	retlw	0xcd
+	retlw	0xcc
+	retlw	0xc
+	retlw	0x40
 
 	global	main@weights
 psect	strings,class=STRING,delta=2,noexec
@@ -2149,7 +2149,7 @@ l2557:
 
 	movlw	0x40
 	movwf	(___flge@ff2+3)
-	movlw	0x40
+	movlw	0x0
 	movwf	(___flge@ff2+2)
 	movlw	0x0
 	movwf	(___flge@ff2+1)
@@ -2258,15 +2258,15 @@ l2561:
 	line	98
 	
 l2563:	
-	movlw	0x3f
+	movlw	0x3e
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0x33
+	movlw	0x4c
 	movwf	(___flmul@b+2)
-	movlw	0x33
+	movlw	0xcc
 	movwf	(___flmul@b+1)
-	movlw	0x33
+	movlw	0xcd
 	movwf	(___flmul@b)
 
 	bsf	status, 5	;RP0=1, select bank1
@@ -2306,13 +2306,13 @@ l2563:
 	movf	(0+(?___flmul)),w
 	movwf	(___fladd@b)
 
-	movlw	0x3e
+	movlw	0x3f
 	movwf	(___flmul@b+3)
-	movlw	0x99
+	movlw	0x4c
 	movwf	(___flmul@b+2)
-	movlw	0x99
+	movlw	0xcc
 	movwf	(___flmul@b+1)
-	movlw	0x9a
+	movlw	0xcd
 	movwf	(___flmul@b)
 
 	bsf	status, 5	;RP0=1, select bank1
@@ -2429,15 +2429,15 @@ u4110:
 	line	105
 	
 l2567:	
-	movlw	0x3f
+	movlw	0x3e
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@kp_scale+3)^080h
-	movlw	0x0
+	movlw	0xcc
 	movwf	(main@kp_scale+2)^080h
-	movlw	0x0
+	movlw	0xcc
 	movwf	(main@kp_scale+1)^080h
-	movlw	0x0
+	movlw	0xcd
 	movwf	(main@kp_scale)^080h
 
 	line	106
@@ -2478,11 +2478,11 @@ l2571:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@kp_scale+3)^080h
-	movlw	0xd9
+	movlw	0xe6
 	movwf	(main@kp_scale+2)^080h
-	movlw	0x99
+	movlw	0x66
 	movwf	(main@kp_scale+1)^080h
-	movlw	0x9a
+	movlw	0x66
 	movwf	(main@kp_scale)^080h
 
 	line	108
@@ -2498,15 +2498,15 @@ l2571:
 	line	111
 	
 l2573:	
-	movlw	0x3f
+	movlw	0x40
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0xe6
+	movlw	0xc
 	movwf	(___flmul@b+2)
-	movlw	0x66
+	movlw	0xcc
 	movwf	(___flmul@b+1)
-	movlw	0x66
+	movlw	0xcd
 	movwf	(___flmul@b)
 
 	bsf	status, 5	;RP0=1, select bank1
@@ -2562,11 +2562,11 @@ l2573:
 
 	
 l2575:	
-	movlw	0x41
+	movlw	0x42
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0xf0
+	movlw	0xc
 	movwf	(___flmul@b+2)
 	movlw	0x0
 	movwf	(___flmul@b+1)
@@ -2782,7 +2782,7 @@ l2583:
 	movlw	0x0
 	movwf	(main@adjustment)^080h
 
-	line	117
+	line	116
 	
 l2585:	
 	bsf	status, 5	;RP0=1, select bank1
@@ -2865,7 +2865,7 @@ l2585:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	((main@dynamic_speed)^080h)+1
-	line	118
+	line	117
 	
 l2587:	
 	movf	(main@dynamic_speed+1)^080h,w
@@ -2893,7 +2893,7 @@ l2589:
 	movwf	(main@dynamic_speed)^080h
 	movlw	0
 	movwf	((main@dynamic_speed)^080h)+1
-	line	120
+	line	119
 	
 l2591:	
 	bsf	status, 5	;RP0=1, select bank1
@@ -2983,7 +2983,7 @@ l2591:
 	addwf	(1+(?___fltol)),w
 	movwf	1+(set_motors@right_pwm)
 	fcall	_set_motors
-	line	121
+	line	120
 	
 l2593:	
 	bsf	status, 5	;RP0=1, select bank1
@@ -2997,15 +2997,15 @@ l2593:
 	movf	(_error)^080h,w
 	movwf	(_last_error)^080h
 
-	line	122
+	line	121
 	goto	l2625
 	
 l104:	
-	line	123
+	line	122
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(66/8),(66)&7	;volatile
-	line	124
+	line	123
 	
 l2595:	
 	bsf	status, 5	;RP0=1, select bank1
@@ -3018,7 +3018,7 @@ iorwf	((_line_lost_timer+1)^080h),w
 u4161:
 	goto	l2601
 u4160:
-	line	125
+	line	124
 	
 l2597:	
 	movlw	0E2h
@@ -3032,7 +3032,7 @@ l2597:
 	movlw	0FFh
 	movwf	((set_motors@right_pwm))+1
 	fcall	_set_motors
-	line	126
+	line	125
 	
 l2599:	
 	asmopt push
@@ -3050,7 +3050,7 @@ decfsz	((??_main)),f
 	goto	u4297
 asmopt pop
 
-	line	129
+	line	128
 	
 l2601:	
 	movlw	01h
@@ -3061,7 +3061,7 @@ l2601:
 	incf	(_line_lost_timer+1)^080h,f
 	movlw	0
 	addwf	(_line_lost_timer+1)^080h,f
-	line	130
+	line	129
 	
 l2603:	
 	movlw	02h
@@ -3087,7 +3087,7 @@ l2605:
 	movwf	(set_motors@right_pwm+1)
 	fcall	_set_motors
 	goto	l2485
-	line	132
+	line	131
 	
 l2607:	
 	movlw	0
@@ -3157,7 +3157,7 @@ l2611:
 u4201:
 	goto	l2615
 u4200:
-	line	133
+	line	132
 	
 l2613:	
 	movlw	02Dh
@@ -3171,9 +3171,9 @@ l2613:
 	movlw	0
 	movwf	((set_motors@right_pwm))+1
 	fcall	_set_motors
-	line	134
+	line	133
 	goto	l2625
-	line	135
+	line	134
 	
 l2615:	
 	bsf	status, 5	;RP0=1, select bank1
@@ -3217,7 +3217,7 @@ l2617:
 	movwf	((set_motors@right_pwm))+1
 	fcall	_set_motors
 	goto	l2625
-	line	136
+	line	135
 	
 l2619:	
 	movlw	0x40
@@ -3260,7 +3260,7 @@ l2621:
 	movlw	0
 	movwf	((set_motors@right_pwm))+1
 	fcall	_set_motors
-	line	140
+	line	139
 	
 l2625:	
 	asmopt push
@@ -3280,7 +3280,7 @@ asmopt pop
 	global	start
 	ljmp	start
 	callstack 0
-	line	143
+	line	142
 GLOBAL	__end_of_main
 	__end_of_main:
 	signat	_main,89
@@ -3288,7 +3288,7 @@ GLOBAL	__end_of_main
 
 ;; *************** function _set_motors *****************
 ;; Defined at:
-;;		line 172 in file "main.c"
+;;		line 171 in file "main.c"
 ;; Parameters:    Size  Location     Type
 ;;  left_pwm        2   36[BANK0 ] short 
 ;;  right_pwm       2   38[BANK0 ] short 
@@ -3316,18 +3316,18 @@ GLOBAL	__end_of_main
 ;; This function uses a non-reentrant model
 ;;
 psect	text1,local,class=CODE,delta=2,merge=1,group=0
-	line	172
+	line	171
 global __ptext1
 __ptext1:	;psect for function _set_motors
 psect	text1
 	file	"main.c"
-	line	172
+	line	171
 	
 _set_motors:	
 ;incstack = 0
 	callstack 7
 ; Regs used in _set_motors: [wreg+status,2+status,0+btemp1]
-	line	173
+	line	172
 	
 l1931:	
 	bcf	status, 5	;RP0=0, select bank0
@@ -3338,11 +3338,11 @@ l1931:
 u2691:
 	goto	l155
 u2690:
-	line	174
+	line	173
 	
 l1933:	
 	bsf	(56/8),(56)&7	;volatile
-	line	175
+	line	174
 	
 l1935:	
 	movf	(set_motors@left_pwm+1),w
@@ -3370,18 +3370,18 @@ l1937:
 	movwf	(set_motors@left_pwm)
 	movlw	0
 	movwf	((set_motors@left_pwm))+1
-	line	176
+	line	175
 	
 l1939:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	comf	(set_motors@left_pwm),w
 	movwf	(21)	;volatile
-	line	177
+	line	176
 	goto	l1947
 	
 l155:	
-	line	178
+	line	177
 	bcf	(56/8),(56)&7	;volatile
 	
 l1941:	
@@ -3390,7 +3390,7 @@ l1941:
 	incf	(set_motors@left_pwm),f
 	skipnz
 	incf	(set_motors@left_pwm+1),f
-	line	179
+	line	178
 	
 l1943:	
 	movf	(set_motors@left_pwm+1),w
@@ -3420,12 +3420,12 @@ l1945:
 	movwf	((set_motors@left_pwm))+1
 	
 l158:	
-	line	180
+	line	179
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(set_motors@left_pwm),w
 	movwf	(21)	;volatile
-	line	182
+	line	181
 	
 l1947:	
 	btfsc	(set_motors@right_pwm+1),7
@@ -3434,11 +3434,11 @@ l1947:
 u2721:
 	goto	l159
 u2720:
-	line	183
+	line	182
 	
 l1949:	
 	bsf	(60/8),(60)&7	;volatile
-	line	184
+	line	183
 	
 l1951:	
 	movf	(set_motors@right_pwm+1),w
@@ -3466,18 +3466,18 @@ l1953:
 	movwf	(set_motors@right_pwm)
 	movlw	0
 	movwf	((set_motors@right_pwm))+1
-	line	185
+	line	184
 	
 l1955:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	comf	(set_motors@right_pwm),w
 	movwf	(27)	;volatile
-	line	186
+	line	185
 	goto	l163
 	
 l159:	
-	line	187
+	line	186
 	bcf	(60/8),(60)&7	;volatile
 	
 l1957:	
@@ -3486,7 +3486,7 @@ l1957:
 	incf	(set_motors@right_pwm),f
 	skipnz
 	incf	(set_motors@right_pwm+1),f
-	line	188
+	line	187
 	
 l1959:	
 	movf	(set_motors@right_pwm+1),w
@@ -3516,12 +3516,12 @@ l1961:
 	movwf	((set_motors@right_pwm))+1
 	
 l162:	
-	line	189
+	line	188
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	(set_motors@right_pwm),w
 	movwf	(27)	;volatile
-	line	191
+	line	190
 	
 l163:	
 	return
@@ -3533,7 +3533,7 @@ GLOBAL	__end_of_set_motors
 
 ;; *************** function _init_hardware *****************
 ;; Defined at:
-;;		line 145 in file "main.c"
+;;		line 144 in file "main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -3560,18 +3560,18 @@ GLOBAL	__end_of_set_motors
 ;; This function uses a non-reentrant model
 ;;
 psect	text2,local,class=CODE,delta=2,merge=1,group=0
-	line	145
+	line	144
 global __ptext2
 __ptext2:	;psect for function _init_hardware
 psect	text2
 	file	"main.c"
-	line	145
+	line	144
 	
 _init_hardware:	
 ;incstack = 0
 	callstack 7
 ; Regs used in _init_hardware: [status,2]
-	line	146
+	line	145
 	
 l1911:	
 	movlw	0FFh
@@ -3590,7 +3590,7 @@ l1911:
 l1913:	
 	clrf	(135)^080h	;volatile
 	clrf	(136)^080h	;volatile
-	line	147
+	line	146
 	
 l1915:	
 	movlw	080h
@@ -3601,7 +3601,7 @@ l1917:
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(31)	;volatile
-	line	148
+	line	147
 	
 l1919:	
 	movlw	0FFh
@@ -3622,7 +3622,7 @@ l1923:
 l1925:	
 	movlw	04h
 	movwf	(18)	;volatile
-	line	149
+	line	148
 	
 l1927:	
 	movlw	0FFh
@@ -3631,7 +3631,7 @@ l1927:
 l1929:	
 	movlw	0FFh
 	movwf	(27)	;volatile
-	line	150
+	line	149
 	
 l132:	
 	return
@@ -3643,7 +3643,7 @@ GLOBAL	__end_of_init_hardware
 
 ;; *************** function _calibrate_sensors *****************
 ;; Defined at:
-;;		line 152 in file "main.c"
+;;		line 151 in file "main.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -3676,18 +3676,18 @@ GLOBAL	__end_of_init_hardware
 ;; This function uses a non-reentrant model
 ;;
 psect	text3,local,class=CODE,delta=2,merge=1,group=0
-	line	152
+	line	151
 global __ptext3
 __ptext3:	;psect for function _calibrate_sensors
 psect	text3
 	file	"main.c"
-	line	152
+	line	151
 	
 _calibrate_sensors:	
 ;incstack = 0
 	callstack 6
 ; Regs used in _calibrate_sensors: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-	line	153
+	line	152
 	
 l1963:	
 	bcf	status, 5	;RP0=0, select bank0
@@ -3729,16 +3729,16 @@ l1973:
 u2751:
 	goto	l1969
 u2750:
-	line	154
+	line	153
 	
 l1975:	
 	clrf	(calibrate_sensors@t)
 	clrf	(calibrate_sensors@t+1)
-	line	155
+	line	154
 	
 l1981:	
 	clrf	(calibrate_sensors@i_101)
-	line	156
+	line	155
 	
 l1987:	
 	movf	(calibrate_sensors@i_101),w
@@ -3749,7 +3749,7 @@ l1987:
 	movwf	(calibrate_sensors@val+1)
 	movf	(0+(?_read_adc)),w
 	movwf	(calibrate_sensors@val)
-	line	157
+	line	156
 	
 l1989:	
 	movf	(calibrate_sensors@i_101),w
@@ -3790,7 +3790,7 @@ l1991:
 	movwf	indf
 	
 l141:	
-	line	158
+	line	157
 	movf	(calibrate_sensors@i_101),w
 	movwf	(??_calibrate_sensors)
 	addwf	(??_calibrate_sensors),w
@@ -3827,7 +3827,7 @@ l1993:
 	incf	fsr0,f
 	movf	(calibrate_sensors@val+1),w
 	movwf	indf
-	line	159
+	line	158
 	
 l1995:	
 	movlw	low(01h)
@@ -3842,7 +3842,7 @@ l1997:
 u2781:
 	goto	l1987
 u2780:
-	line	160
+	line	159
 	
 l1999:	
 	asmopt push
@@ -3888,7 +3888,7 @@ l2003:
 	xorwf	((66)/8),f
 	
 l143:	
-	line	161
+	line	160
 	movlw	01h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
@@ -3908,7 +3908,7 @@ l143:
 u2801:
 	goto	l1981
 u2800:
-	line	162
+	line	161
 	
 l2005:	
 	clrf	(calibrate_sensors@i_103)
@@ -3972,7 +3972,7 @@ l2015:
 u2811:
 	goto	l2011
 u2810:
-	line	163
+	line	162
 	
 l146:	
 	return
@@ -3984,7 +3984,7 @@ GLOBAL	__end_of_calibrate_sensors
 
 ;; *************** function _read_adc *****************
 ;; Defined at:
-;;		line 165 in file "main.c"
+;;		line 164 in file "main.c"
 ;; Parameters:    Size  Location     Type
 ;;  channel         1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -4012,19 +4012,19 @@ GLOBAL	__end_of_calibrate_sensors
 ;; This function uses a non-reentrant model
 ;;
 psect	text4,local,class=CODE,delta=2,merge=1,group=0
-	line	165
+	line	164
 global __ptext4
 __ptext4:	;psect for function _read_adc
 psect	text4
 	file	"main.c"
-	line	165
+	line	164
 	
 _read_adc:	
 ;incstack = 0
 	callstack 6
 ; Regs used in _read_adc: [wreg+status,2+status,0]
 	movwf	(read_adc@channel)
-	line	166
+	line	165
 	
 l1667:	
 	movlw	low(0C7h)
@@ -4043,7 +4043,7 @@ u2125:
 	clrc
 	rlf	(??_read_adc),w
 	iorwf	(31),f	;volatile
-	line	167
+	line	166
 	
 l1669:	
 	asmopt push
@@ -4060,7 +4060,7 @@ l1671:
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(250/8),(250)&7	;volatile
-	line	168
+	line	167
 	
 l149:	
 	btfsc	(250/8),(250)&7	;volatile
@@ -4069,7 +4069,7 @@ l149:
 u2131:
 	goto	l149
 u2130:
-	line	169
+	line	168
 	
 l1673:	
 	movf	(30),w	;volatile
@@ -4078,7 +4078,7 @@ l1673:
 	bcf	status, 6	;RP1=0, select bank1
 	movf	(158)^080h,w	;volatile
 	movwf	(?_read_adc)
-	line	170
+	line	169
 	
 l152:	
 	return

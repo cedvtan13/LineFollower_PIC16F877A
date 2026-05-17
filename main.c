@@ -22,15 +22,15 @@
 #define BUTTON       RB0
 
 // --- PID Constants ---
-float Kp = 1.8;         
+float Kp = 2.2;         
 float Ki = 0.0;         
-float Kd = 30.0;        // Increased to 30.0 to help stop post-curve oscillations
+float Kd = 35.0;        
 
 // Motor Constants
-#define MAX_SPEED       145 // Slightly increased headroom
+#define MAX_SPEED       145 
 #define BASE_SPEED      85  
-#define CURVE_SPEED_MIN 30  // Increased to maintain torque during sharp pivot
-#define RECOVERY_SPEED  80  // Faster search as requested
+#define CURVE_SPEED_MIN 30  
+#define RECOVERY_SPEED  80  
 #define GAP_SPEED       45  
 #define GAP_TIMEOUT     150        
 
@@ -90,22 +90,22 @@ void main(void) {
                 
                 float abs_error = (error < 0) ? -error : error;
 
-                // Deadband
-                if (abs_error < 3.0f) error = 0;
+                // --- Precision Deadband: Increased slightly to 2.0 to kill micro-jitter ---
+                if (abs_error < 2.0f) error = 0;
                 
-                // Responsive Filter
+                // --- Heavy Derivative Filter: 0.8 old / 0.2 new to kill jitter ---
                 derivative = error - last_error;
-                filtered_derivative = (filtered_derivative * 0.3f) + (derivative * 0.7f);
+                filtered_derivative = (filtered_derivative * 0.8f) + (derivative * 0.2f);
                 
-                // --- Adaptive Strategy for Curves & Corners ---
+                // --- Gain Scaling: Soft-Center restored for straight-line silence ---
                 float kp_scale = 1.0f;
                 float speed_drop_factor = 1.1f;
 
                 if (abs_error < 15.0f) {
-                    kp_scale = 0.5f;        // Soft-center for straights
+                    kp_scale = 0.4f;        // Gentle corrections near center
                 } else if (abs_error > 35.0f) {
-                    kp_scale = 1.7f;        // "Snap" gain for steep curves/90-degree corners
-                    speed_drop_factor = 1.6f; // Aggressive braking to prevent slipping
+                    kp_scale = 1.8f;        // Sharp snap for steep curves
+                    speed_drop_factor = 1.6f; 
                 }
 
                 float adjustment = (error * Kp * kp_scale) + (filtered_derivative * Kd);
@@ -113,7 +113,6 @@ void main(void) {
                 if (adjustment > 145.0f) adjustment = 145.0f;
                 if (adjustment < -145.0f) adjustment = -145.0f;
 
-                // Apply adaptive speed reduction
                 int16_t dynamic_speed = BASE_SPEED - (int16_t)(abs_error * speed_drop_factor);
                 if (dynamic_speed < CURVE_SPEED_MIN) dynamic_speed = CURVE_SPEED_MIN;
                 
