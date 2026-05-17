@@ -111,7 +111,7 @@ Ensure the 10kΩ pull-down is present, as RB0 does not have internal pull-downs 
 ### 7.2 Challenge: Center-Line Jitter
 - **The Issue:** High-frequency motor jitter occurred even when centered, caused by tiny ADC fluctuations being amplified by the Derivative gain (`Kd`).
 - **The Solution:** 
-  - **Deadband Logic:** Implemented a +/- 3.0 error deadband where micro-corrections are ignored.
+  - **Deadband Logic:** Implemented a +/- 2.5 error deadband where micro-corrections are ignored.
   - **Derivative Filtering:** Added a first-order Low-Pass Filter on the derivative term (`filtered_derivative`) to smooth out sensor spikes while maintaining low-latency response.
 
 ### 7.3 Challenge: Wide Post-Corner Oscillations
@@ -123,20 +123,40 @@ Ensure the 10kΩ pull-down is present, as RB0 does not have internal pull-downs 
 
 ### 7.4 Challenge: Sluggish Recovery
 - **The Issue:** The search speed during line loss was too slow, leading to the robot drifting too far before it could pivot back.
-- **The Solution:** Increased `RECOVERY_SPEED` to `75` and implemented an **Active Inertia Brake**. Upon line loss, the motors provide a hard `8ms` reverse pulse to kill forward momentum before beginning the high-speed pivot search.
+- **The Solution:** Increased `RECOVERY_SPEED` to `80` and implemented an **Active Inertia Brake**. Upon line loss, the motors provide a hard `8ms` reverse pulse to kill forward momentum before beginning the high-speed pivot search.
+
+### 7.5 Challenge: Slipping on Steep C-Curves
+- **The Issue:** The robot handled 90-degree corners well but overshot and slipped on steep continuous curves because the aggressive cornering logic triggered too late.
+- **The Solution:** 
+  - **Steep Curve Detection:** Lowered the 'Snap' threshold to `35.0` to detect sharp situations earlier.
+  - **Adaptive Braking:** Increased the `speed_drop_factor` to `1.6f`. The robot now performs aggressive engine braking when off-center, preventing wheel slip during high-torque pivots.
+
+### 7.6 Engineering Discussion: Floating Point on 8-bit PIC
+- **Discussion:** Addressed concerns regarding the use of `float` on the PIC16F877A.
+- **Conclusion:** While the chip lacks hardware FPU, the **XC8 compiler successfully emulates floating point in software**. Despite the library overhead, the current optimized loop frequency of **5kHz** (~200us) is more than sufficient for high-speed tracking, proving that software-emulated PID is a viable and precise solution for this architecture.
+
+### 7.7 Final Performance Polish: Geometry & Jitter Suppression
+- **The Issue:** Persistent high-frequency jitter on straights and wide "S" pattern swinging.
+- **Sensor Geometry Analysis:** With 9.5mm sensor spacing and a 28mm track, approximately 3 sensors are always on the line. This creates a very high-resolution but highly sensitive error signal that triggers rapid corrections.
+- **The Solution:** 
+  - **Extreme Jitter Kill:** Implemented a heavy **90% smoothing filter** on the derivative term and slashed `Kd` to `10.0` to eliminate high-frequency electronic noise.
+  - **Deadband Lock-in:** Widened the deadband to `5.0` to give the robot a stable center-zone, stopping the micro-shivers.
+  - **Swing Search:** Replaced place-pivoting with a sharp arc search during line loss, driving the robot back toward the track intercept point.
 
 ---
 
-## 8. Final Configuration (Stable Milestone)
+## 8. Final Configuration (High-Stability Milestone)
 
 | Parameter           | Value | Description                                  |
 |---------------------|-------|----------------------------------------------|
-| **Kp**              | 1.8   | Proportional Gain (Responsive but calm)      |
-| **Kd**              | 25.0  | Derivative Gain (High damping transition)    |
-| **Deadband**        | 3.0   | Center-line "Quiet Zone"                     |
-| **Recovery Speed**  | 75    | High-torque pivot for search                 |
-| **Brake Pulse**     | 8ms   | Inertia-killing reverse pulse                |
+| **Kp**              | 1.3   | Proportional Gain (Calm baseline)            |
+| **Kd**              | 10.0  | Derivative Gain (Electronic noise suppressed)|
+| **Deadband**        | 5.0   | Solid "Lock-in" straight-line zone           |
+| **Base Speed**      | 70    | Absolute stability floor                     |
+| **Recovery Speed**  | 70/-30| Sharp-arc snap back to intercept             |
 | **Loop Frequency**  | ~5kHz | High-speed sampling (200us delay)            |
+| **Derivative LPF**  | 90%   | Aggressive noise rejection filter            |
+
 
 ---
 

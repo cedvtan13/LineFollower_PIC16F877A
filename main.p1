@@ -179,7 +179,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25
 [v _Kp `f ~T0 @X0 1 e ]
 [i _Kp
--> .2.2 `f
+-> .1.7 `f
 ]
 "26
 [v _Ki `f ~T0 @X0 1 e ]
@@ -189,7 +189,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "27
 [v _Kd `f ~T0 @X0 1 e ]
 [i _Kd
--> .35.0 `f
+-> .45.0 `f
 ]
 "38
 [v _sensor_min `us ~T0 @X0 -> 8 `i e ]
@@ -373,24 +373,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _abs_error `f ~T0 @X0 1 a ]
 [e = _abs_error ? < _error -> -> 0 `i `f : -U _error _error ]
 "94
-[e $ ! < _abs_error -> .2.0 `f 129  ]
+[e $ ! < _abs_error -> .4.0 `f 129  ]
 [e = _error -> -> 0 `i `f ]
 [e :U 129 ]
 "97
 [e = _derivative - _error _last_error ]
 "98
-[e = _filtered_derivative + * _filtered_derivative -> .0.8 `f * _derivative -> .0.2 `f ]
+[e = _filtered_derivative + * _filtered_derivative -> .0.4 `f * _derivative -> .0.6 `f ]
 "101
 [v _kp_scale `f ~T0 @X0 1 a ]
 [e = _kp_scale -> .1.0 `f ]
 "102
 [v _speed_drop_factor `f ~T0 @X0 1 a ]
-[e = _speed_drop_factor -> .1.1 `f ]
+[e = _speed_drop_factor -> .1.2 `f ]
 "104
-[e $ ! < _abs_error -> .15.0 `f 130  ]
+[e $ ! < _abs_error -> .20.0 `f 130  ]
 {
 "105
-[e = _kp_scale -> .0.4 `f ]
+[e = _kp_scale -> .0.3 `f ]
 "106
 }
 [e $U 131  ]
@@ -398,9 +398,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! > _abs_error -> .35.0 `f 132  ]
 {
 "107
-[e = _kp_scale -> .1.8 `f ]
+[e = _kp_scale -> .1.6 `f ]
 "108
-[e = _speed_drop_factor -> .1.6 `f ]
+[e = _speed_drop_factor -> .1.7 `f ]
 "109
 }
 [e :U 132 ]
@@ -409,19 +409,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _adjustment `f ~T0 @X0 1 a ]
 [e = _adjustment + * * _error _Kp _kp_scale * _filtered_derivative _Kd ]
 "113
-[e $ ! > _adjustment -> .145.0 `f 133  ]
-[e = _adjustment -> .145.0 `f ]
+[e $ ! > _adjustment -> .140.0 `f 133  ]
+[e = _adjustment -> .140.0 `f ]
 [e :U 133 ]
 "114
-[e $ ! < _adjustment -U -> .145.0 `f 134  ]
-[e = _adjustment -U -> .145.0 `f ]
+[e $ ! < _adjustment -U -> .140.0 `f 134  ]
+[e = _adjustment -U -> .140.0 `f ]
 [e :U 134 ]
 "116
 [v _dynamic_speed `s ~T0 @X0 1 a ]
-[e = _dynamic_speed -> - -> 85 `i -> -> * _abs_error _speed_drop_factor `s `i `s ]
+[e = _dynamic_speed -> - -> 70 `i -> -> * _abs_error _speed_drop_factor `s `i `s ]
 "117
-[e $ ! < -> _dynamic_speed `i -> 30 `i 135  ]
-[e = _dynamic_speed -> -> 30 `i `s ]
+[e $ ! < -> _dynamic_speed `i -> 25 `i 135  ]
+[e = _dynamic_speed -> -> 25 `i `s ]
 [e :U 135 ]
 "119
 [e ( _set_motors (2 , -> - -> _dynamic_speed `i -> -> _adjustment `s `i `s -> + -> _dynamic_speed `i -> -> _adjustment `s `i `s ]
@@ -438,7 +438,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _line_lost_timer `ui -> -> 0 `i `ui 137  ]
 {
 "124
-[e ( _set_motors (2 , -> -U -> 30 `i `s -> -U -> 30 `i `s ]
+[e ( _set_motors (2 , -> -U -> 25 `i `s -> -U -> 25 `i `s ]
 "125
 [e ( __delay (1 -> * -> -> 8 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
 "126
@@ -457,7 +457,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! && < -> _line_lost_timer `ui -> -> 150 `i `ui && < _last_error -> .15.0 `f > _last_error -U -> .15.0 `f 139  ]
 {
 "132
-[e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
+[e ( _set_motors (2 , -> -> 40 `i `s -> -> 40 `i `s ]
 "133
 }
 [e $U 140  ]
@@ -465,16 +465,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "134
 [e $ ! < _last_error -U -> .5.0 `f 141  ]
-[e ( _set_motors (2 , -> -> 80 `i `s -> -U -> 80 `i `s ]
+[e ( _set_motors (2 , -> -> 70 `i `s -> -U -> 30 `i `s ]
 [e $U 142  ]
 "135
 [e :U 141 ]
 [e $ ! > _last_error -> .5.0 `f 143  ]
-[e ( _set_motors (2 , -> -U -> 80 `i `s -> -> 80 `i `s ]
+[e ( _set_motors (2 , -> -U -> 30 `i `s -> -> 70 `i `s ]
 [e $U 144  ]
 "136
 [e :U 143 ]
-[e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
+[e ( _set_motors (2 , -> -> 40 `i `s -> -> 40 `i `s ]
 [e :U 144 ]
 [e :U 142 ]
 "137
@@ -642,8 +642,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "173
 [e = _RC0 -> -> 1 `i `b ]
 "174
-[e $ ! > -> _left_pwm `i -> 145 `i 168  ]
-[e = _left_pwm -> -> 145 `i `s ]
+[e $ ! > -> _left_pwm `i -> 140 `i 168  ]
+[e = _left_pwm -> -> 140 `i `s ]
 [e :U 168 ]
 "175
 [e = _CCPR1L -> - -> 255 `i -> _left_pwm `i `uc ]
@@ -656,8 +656,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _RC0 -> -> 0 `i `b ]
 [e = _left_pwm -> -U -> _left_pwm `i `s ]
 "178
-[e $ ! > -> _left_pwm `i -> 145 `i 170  ]
-[e = _left_pwm -> -> 145 `i `s ]
+[e $ ! > -> _left_pwm `i -> 140 `i 170  ]
+[e = _left_pwm -> -> 140 `i `s ]
 [e :U 170 ]
 "179
 [e = _CCPR1L -> _left_pwm `uc ]
@@ -670,8 +670,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "182
 [e = _RC4 -> -> 1 `i `b ]
 "183
-[e $ ! > -> _right_pwm `i -> 145 `i 172  ]
-[e = _right_pwm -> -> 145 `i `s ]
+[e $ ! > -> _right_pwm `i -> 140 `i 172  ]
+[e = _right_pwm -> -> 140 `i `s ]
 [e :U 172 ]
 "184
 [e = _CCPR2L -> - -> 255 `i -> _right_pwm `i `uc ]
@@ -684,8 +684,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _RC4 -> -> 0 `i `b ]
 [e = _right_pwm -> -U -> _right_pwm `i `s ]
 "187
-[e $ ! > -> _right_pwm `i -> 145 `i 174  ]
-[e = _right_pwm -> -> 145 `i `s ]
+[e $ ! > -> _right_pwm `i -> 140 `i 174  ]
+[e = _right_pwm -> -> 140 `i `s ]
 [e :U 174 ]
 "188
 [e = _CCPR2L -> _right_pwm `uc ]

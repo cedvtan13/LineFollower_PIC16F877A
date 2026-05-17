@@ -362,7 +362,7 @@ __pidataBANK0:
 ;initializer for _Kd
 	retlw	0x0
 	retlw	0x0
-	retlw	0xc
+	retlw	0x34
 	retlw	0x42
 
 psect	idataBANK1,class=CODE,space=0,delta=2,noexec
@@ -371,10 +371,10 @@ __pidataBANK1:
 	line	25
 
 ;initializer for _Kp
-	retlw	0xcd
-	retlw	0xcc
-	retlw	0xc
-	retlw	0x40
+	retlw	0x9a
+	retlw	0x99
+	retlw	0xd9
+	retlw	0x3f
 
 	global	main@weights
 psect	strings,class=STRING,delta=2,noexec
@@ -2149,7 +2149,7 @@ l2557:
 
 	movlw	0x40
 	movwf	(___flge@ff2+3)
-	movlw	0x0
+	movlw	0x80
 	movwf	(___flge@ff2+2)
 	movlw	0x0
 	movwf	(___flge@ff2+1)
@@ -2258,15 +2258,15 @@ l2561:
 	line	98
 	
 l2563:	
-	movlw	0x3e
+	movlw	0x3f
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0x4c
+	movlw	0x19
 	movwf	(___flmul@b+2)
-	movlw	0xcc
+	movlw	0x99
 	movwf	(___flmul@b+1)
-	movlw	0xcd
+	movlw	0x9a
 	movwf	(___flmul@b)
 
 	bsf	status, 5	;RP0=1, select bank1
@@ -2306,9 +2306,9 @@ l2563:
 	movf	(0+(?___flmul)),w
 	movwf	(___fladd@b)
 
-	movlw	0x3f
+	movlw	0x3e
 	movwf	(___flmul@b+3)
-	movlw	0x4c
+	movlw	0xcc
 	movwf	(___flmul@b+2)
 	movlw	0xcc
 	movwf	(___flmul@b+1)
@@ -2391,11 +2391,11 @@ l2563:
 	line	102
 	movlw	0x3f
 	movwf	(main@speed_drop_factor+3)^080h
-	movlw	0x8c
+	movlw	0x99
 	movwf	(main@speed_drop_factor+2)^080h
-	movlw	0xcc
+	movlw	0x99
 	movwf	(main@speed_drop_factor+1)^080h
-	movlw	0xcd
+	movlw	0x9a
 	movwf	(main@speed_drop_factor)^080h
 
 	line	104
@@ -2412,7 +2412,7 @@ l2565:
 
 	movlw	0x41
 	movwf	(___flge@ff2+3)
-	movlw	0x70
+	movlw	0xa0
 	movwf	(___flge@ff2+2)
 	movlw	0x0
 	movwf	(___flge@ff2+1)
@@ -2433,11 +2433,11 @@ l2567:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@kp_scale+3)^080h
-	movlw	0xcc
+	movlw	0x99
 	movwf	(main@kp_scale+2)^080h
-	movlw	0xcc
+	movlw	0x99
 	movwf	(main@kp_scale+1)^080h
-	movlw	0xcd
+	movlw	0x9a
 	movwf	(main@kp_scale)^080h
 
 	line	106
@@ -2478,35 +2478,35 @@ l2571:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@kp_scale+3)^080h
-	movlw	0xe6
+	movlw	0xcc
 	movwf	(main@kp_scale+2)^080h
-	movlw	0x66
+	movlw	0xcc
 	movwf	(main@kp_scale+1)^080h
-	movlw	0x66
+	movlw	0xcd
 	movwf	(main@kp_scale)^080h
 
 	line	108
 	movlw	0x3f
 	movwf	(main@speed_drop_factor+3)^080h
-	movlw	0xcc
+	movlw	0xd9
 	movwf	(main@speed_drop_factor+2)^080h
-	movlw	0xcc
+	movlw	0x99
 	movwf	(main@speed_drop_factor+1)^080h
-	movlw	0xcd
+	movlw	0x9a
 	movwf	(main@speed_drop_factor)^080h
 
 	line	111
 	
 l2573:	
-	movlw	0x40
+	movlw	0x3f
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0xc
+	movlw	0xd9
 	movwf	(___flmul@b+2)
-	movlw	0xcc
+	movlw	0x99
 	movwf	(___flmul@b+1)
-	movlw	0xcd
+	movlw	0x9a
 	movwf	(___flmul@b)
 
 	bsf	status, 5	;RP0=1, select bank1
@@ -2566,7 +2566,7 @@ l2575:
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(___flmul@b+3)
-	movlw	0xc
+	movlw	0x34
 	movwf	(___flmul@b+2)
 	movlw	0x0
 	movwf	(___flmul@b+1)
@@ -2703,7 +2703,7 @@ l2575:
 l2577:	
 	movlw	0x43
 	movwf	(___flge@ff1+3)
-	movlw	0x11
+	movlw	0xc
 	movwf	(___flge@ff1+2)
 	movlw	0x0
 	movwf	(___flge@ff1+1)
@@ -2732,7 +2732,7 @@ l2579:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@adjustment+3)^080h
-	movlw	0x11
+	movlw	0xc
 	movwf	(main@adjustment+2)^080h
 	movlw	0x0
 	movwf	(main@adjustment+1)^080h
@@ -2755,7 +2755,7 @@ l2581:
 
 	movlw	0xc3
 	movwf	(___flge@ff2+3)
-	movlw	0x11
+	movlw	0xc
 	movwf	(___flge@ff2+2)
 	movlw	0x0
 	movwf	(___flge@ff2+1)
@@ -2775,7 +2775,7 @@ l2583:
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@adjustment+3)^080h
-	movlw	0x11
+	movlw	0xc
 	movwf	(main@adjustment+2)^080h
 	movlw	0x0
 	movwf	(main@adjustment+1)^080h
@@ -2848,7 +2848,7 @@ l2585:
 	movwf	(___fltol@f1)
 
 	fcall	___fltol
-	movlw	055h
+	movlw	046h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(??_main)
@@ -2875,7 +2875,7 @@ l2587:
 	subwf	btemp1,w
 	skipz
 	goto	u4155
-	movlw	01Eh
+	movlw	019h
 	subwf	(main@dynamic_speed)^080h,w
 u4155:
 
@@ -2887,7 +2887,7 @@ u4151:
 u4150:
 	
 l2589:	
-	movlw	01Eh
+	movlw	019h
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(main@dynamic_speed)^080h
@@ -3021,13 +3021,13 @@ u4160:
 	line	124
 	
 l2597:	
-	movlw	0E2h
+	movlw	0E7h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
 	movlw	0FFh
 	movwf	((set_motors@left_pwm))+1
-	movlw	0E2h
+	movlw	0E7h
 	movwf	(set_motors@right_pwm)
 	movlw	0FFh
 	movwf	((set_motors@right_pwm))+1
@@ -3160,13 +3160,13 @@ u4200:
 	line	132
 	
 l2613:	
-	movlw	02Dh
+	movlw	028h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
 	movlw	0
 	movwf	((set_motors@left_pwm))+1
-	movlw	02Dh
+	movlw	028h
 	movwf	(set_motors@right_pwm)
 	movlw	0
 	movwf	((set_motors@right_pwm))+1
@@ -3205,13 +3205,13 @@ u4211:
 u4210:
 	
 l2617:	
-	movlw	050h
+	movlw	046h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
 	movlw	0
 	movwf	((set_motors@left_pwm))+1
-	movlw	0B0h
+	movlw	0E2h
 	movwf	(set_motors@right_pwm)
 	movlw	0FFh
 	movwf	((set_motors@right_pwm))+1
@@ -3249,13 +3249,13 @@ u4221:
 u4220:
 	
 l2621:	
-	movlw	0B0h
+	movlw	0E2h
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
 	movlw	0FFh
 	movwf	((set_motors@left_pwm))+1
-	movlw	050h
+	movlw	046h
 	movwf	(set_motors@right_pwm)
 	movlw	0
 	movwf	((set_motors@right_pwm))+1
@@ -3352,7 +3352,7 @@ l1935:
 	subwf	btemp1,w
 	skipz
 	goto	u2705
-	movlw	092h
+	movlw	08Dh
 	subwf	(set_motors@left_pwm),w
 u2705:
 
@@ -3364,7 +3364,7 @@ u2701:
 u2700:
 	
 l1937:	
-	movlw	091h
+	movlw	08Ch
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
@@ -3400,7 +3400,7 @@ l1943:
 	subwf	btemp1,w
 	skipz
 	goto	u2715
-	movlw	092h
+	movlw	08Dh
 	subwf	(set_motors@left_pwm),w
 u2715:
 
@@ -3412,7 +3412,7 @@ u2711:
 u2710:
 	
 l1945:	
-	movlw	091h
+	movlw	08Ch
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@left_pwm)
@@ -3448,7 +3448,7 @@ l1951:
 	subwf	btemp1,w
 	skipz
 	goto	u2735
-	movlw	092h
+	movlw	08Dh
 	subwf	(set_motors@right_pwm),w
 u2735:
 
@@ -3460,7 +3460,7 @@ u2731:
 u2730:
 	
 l1953:	
-	movlw	091h
+	movlw	08Ch
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@right_pwm)
@@ -3496,7 +3496,7 @@ l1959:
 	subwf	btemp1,w
 	skipz
 	goto	u2745
-	movlw	092h
+	movlw	08Dh
 	subwf	(set_motors@right_pwm),w
 u2745:
 
@@ -3508,7 +3508,7 @@ u2741:
 u2740:
 	
 l1961:	
-	movlw	091h
+	movlw	08Ch
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(set_motors@right_pwm)

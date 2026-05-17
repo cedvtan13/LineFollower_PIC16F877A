@@ -21,17 +21,17 @@
 #define LED          RD2
 #define BUTTON       RB0
 
-// --- PID Constants ---
-float Kp = 2.2;         
+// --- PID Constants (Extreme Jitter Suppression) ---
+float Kp = 1.3;         // Lowered to dampen overall system energy
 float Ki = 0.0;         
-float Kd = 35.0;        
+float Kd = 10.0;        // Drastically lowered; high Kd causes high-freq jitter
 
 // Motor Constants
-#define MAX_SPEED       145 
-#define BASE_SPEED      85  
-#define CURVE_SPEED_MIN 30  
-#define RECOVERY_SPEED  80  
-#define GAP_SPEED       45  
+#define MAX_SPEED       140 
+#define BASE_SPEED      70  
+#define CURVE_SPEED_MIN 25  
+#define RECOVERY_SPEED  70  
+#define GAP_SPEED       40  
 #define GAP_TIMEOUT     150        
 
 // Calibration Data
@@ -90,28 +90,28 @@ void main(void) {
                 
                 float abs_error = (error < 0) ? -error : error;
 
-                // --- Precision Deadband: Increased slightly to 2.0 to kill micro-jitter ---
-                if (abs_error < 2.0f) error = 0;
+                // --- Wide Deadband: 5.0 ensures a quiet center ---
+                if (abs_error < 5.0f) error = 0;
                 
-                // --- Heavy Derivative Filter: 0.8 old / 0.2 new to kill jitter ---
+                // --- Extreme Smoothing: 0.9 old / 0.1 new signal to kill high-freq jitter ---
                 derivative = error - last_error;
-                filtered_derivative = (filtered_derivative * 0.8f) + (derivative * 0.2f);
+                filtered_derivative = (filtered_derivative * 0.9f) + (derivative * 0.1f);
                 
-                // --- Gain Scaling: Soft-Center restored for straight-line silence ---
+                // Gain Scaling
                 float kp_scale = 1.0f;
-                float speed_drop_factor = 1.1f;
+                float speed_drop_factor = 1.2f;
 
-                if (abs_error < 15.0f) {
-                    kp_scale = 0.4f;        // Gentle corrections near center
+                if (abs_error < 20.0f) {
+                    kp_scale = 0.3f;        // Gentle corrections
                 } else if (abs_error > 35.0f) {
-                    kp_scale = 1.8f;        // Sharp snap for steep curves
-                    speed_drop_factor = 1.6f; 
+                    kp_scale = 1.8f;        // Sharp snap for turns
+                    speed_drop_factor = 1.8f; 
                 }
 
                 float adjustment = (error * Kp * kp_scale) + (filtered_derivative * Kd);
 
-                if (adjustment > 145.0f) adjustment = 145.0f;
-                if (adjustment < -145.0f) adjustment = -145.0f;
+                if (adjustment > 140.0f) adjustment = 140.0f;
+                if (adjustment < -140.0f) adjustment = -140.0f;
 
                 int16_t dynamic_speed = BASE_SPEED - (int16_t)(abs_error * speed_drop_factor);
                 if (dynamic_speed < CURVE_SPEED_MIN) dynamic_speed = CURVE_SPEED_MIN;
@@ -121,7 +121,7 @@ void main(void) {
             } else {
                 LED = 0; 
                 if (line_lost_timer == 0) {
-                    set_motors(-30, -30); 
+                    set_motors(-20, -20); 
                     __delay_ms(8);
                 }
                 
@@ -131,8 +131,8 @@ void main(void) {
                 if (line_lost_timer < GAP_TIMEOUT && ((last_error < 15.0f) && (last_error > -15.0f))) {
                     set_motors(GAP_SPEED, GAP_SPEED);
                 } else {
-                    if (last_error < -5.0f) set_motors(RECOVERY_SPEED, -RECOVERY_SPEED);
-                    else if (last_error > 5.0f) set_motors(-RECOVERY_SPEED, RECOVERY_SPEED);
+                    if (last_error < -5.0f) set_motors(RECOVERY_SPEED, -30); 
+                    else if (last_error > 5.0f) set_motors(-30, RECOVERY_SPEED); 
                     else set_motors(GAP_SPEED, GAP_SPEED);
                 }
             }
@@ -188,4 +188,5 @@ void set_motors(int16_t left_pwm, int16_t right_pwm) {
         CCPR2L = (uint8_t)right_pwm; 
     }
 }
+
 
