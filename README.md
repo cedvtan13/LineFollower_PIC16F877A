@@ -46,14 +46,19 @@
 ## 3. Subsystem Details
 
 ### 3.1 Motor Control Logic (DRV8871)
-Speed is controlled via Hardware PWM on `CCP1` (Left) and `CCP2` (Right).
+The robot uses a mixed PWM/Digital control strategy to achieve bidirectional speed control using only two hardware PWM channels.
 
-| Movement | Left IN1 (RC2) | Left IN2 (RC0) | Right IN1 (RC1) | Right IN2 (RC4) |
-|----------|----------------|----------------|-----------------|-----------------|
-| Forward  | PWM            | 0              | PWM             | 0               |
-| Backward | 0              | PWM            | 0               | PWM             |
-| Brake    | 1              | 1              | 1               | 1               |
-| Coast    | 0              | 0              | 0               | 0               |
+*   **Speed Control (Hardware PWM):** RC2 (`CCP1`) for Left Motor, RC1 (`CCP2`) for Right Motor.
+*   **Direction Control (Digital):** RC0 for Left Motor, RC4 for Right Motor.
+
+| Movement | Left IN1 (RC2 - PWM) | Left IN2 (RC0 - Digital) | Right IN1 (RC1 - PWM) | Right IN2 (RC4 - Digital) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Forward** | **Inv. PWM** (255-speed) | **1** (HIGH) | **Inv. PWM** (255-speed) | **1** (HIGH) |
+| **Backward** | **Normal PWM** (speed) | **0** (LOW) | **Normal PWM** (speed) | **0** (LOW) |
+| **Brake** | 1 (HIGH) | 1 (HIGH) | 1 (HIGH) | 1 (HIGH) |
+| **Coast** | 0 (LOW) | 0 (LOW) | 0 (LOW) | 0 (LOW) |
+
+**Note:** Hardware PWM is only present on RC1 and RC2. By toggling the direction pins (RC0/RC4) and appropriately inverting the PWM signal, we achieve full speed control in both directions without needing four dedicated PWM channels.
 
 ### 3.2 User Button (RB0)
 The button handles multiple states:
