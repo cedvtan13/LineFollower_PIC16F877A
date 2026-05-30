@@ -1,0 +1,1382 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+[v F164 `(v ~T0 @X0 1 tf1`ul ]
+"20 /opt/microchip/xc8/v3.10/pic/include/builtins.h
+[v __delay `JF164 ~T0 @X0 0 e ]
+[p i __delay ]
+"119 kent.c
+[v _init_hardware `(v ~T0 @X0 0 ef ]
+"124
+[v _load_cal_from_eeprom `(v ~T0 @X0 0 ef ]
+"121
+[v _set_motors `(v ~T0 @X0 0 ef2`s`s ]
+"2743 ../PIC16Fxxx_DFP/xc8/pic/include/proc/pic16f877a.h
+[v _RD2 `Vb ~T0 @X0 0 e@66 ]
+"156 kent.c
+[c E1034 0 1 2 .. ]
+[n E1034 . BTN_NONE BTN_SHORT BTN_LONG  ]
+"128
+[v _check_button `(E1034 ~T0 @X0 0 ef ]
+"122
+[v _calibrate_sensors `(v ~T0 @X0 0 ef ]
+"123
+[v _save_cal_to_eeprom `(v ~T0 @X0 0 ef ]
+"2662 ../PIC16Fxxx_DFP/xc8/pic/include/proc/pic16f877a.h
+[v _RB0 `Vb ~T0 @X0 0 e@48 ]
+"120 kent.c
+[v _read_adc `(us ~T0 @X0 0 ef1`uc ]
+"125
+[v _clamp_int16 `(s ~T0 @X0 0 ef3`s`s`s ]
+"262 ../PIC16Fxxx_DFP/xc8/pic/include/proc/pic16f877a.h
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
+"1309
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
+"1545
+[v _TRISE `Vuc ~T0 @X0 0 e@137 ]
+"1359
+[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
+"1421
+[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"1483
+[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
+"2213
+[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
+"1143
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"1800
+[v _PR2 `Vuc ~T0 @X0 0 e@146 ]
+"890
+[v _CCP1CON `Vuc ~T0 @X0 0 e@23 ]
+"1078
+[v _CCP2CON `Vuc ~T0 @X0 0 e@29 ]
+"721
+[v _T2CON `Vuc ~T0 @X0 0 e@18 ]
+"876
+[v _CCPR1L `Vuc ~T0 @X0 0 e@21 ]
+"1064
+[v _CCPR2L `Vuc ~T0 @X0 0 e@27 ]
+"2566
+[v _GO_nDONE `Vb ~T0 @X0 0 e@250 ]
+"1136
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"2206
+[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
+"2692
+[v _RC0 `Vb ~T0 @X0 0 e@56 ]
+"2704
+[v _RC4 `Vb ~T0 @X0 0 e@60 ]
+"38 ../PIC16Fxxx_DFP/xc8/pic/include/proc/pic16f877a.h
+[; <" INDF equ 00h ;# ">
+"45
+[; <" TMR0 equ 01h ;# ">
+"52
+[; <" PCL equ 02h ;# ">
+"59
+[; <" STATUS equ 03h ;# ">
+"145
+[; <" FSR equ 04h ;# ">
+"152
+[; <" PORTA equ 05h ;# ">
+"202
+[; <" PORTB equ 06h ;# ">
+"264
+[; <" PORTC equ 07h ;# ">
+"326
+[; <" PORTD equ 08h ;# ">
+"388
+[; <" PORTE equ 09h ;# ">
+"420
+[; <" PCLATH equ 0Ah ;# ">
+"440
+[; <" INTCON equ 0Bh ;# ">
+"518
+[; <" PIR1 equ 0Ch ;# ">
+"580
+[; <" PIR2 equ 0Dh ;# ">
+"620
+[; <" TMR1 equ 0Eh ;# ">
+"627
+[; <" TMR1L equ 0Eh ;# ">
+"634
+[; <" TMR1H equ 0Fh ;# ">
+"641
+[; <" T1CON equ 010h ;# ">
+"716
+[; <" TMR2 equ 011h ;# ">
+"723
+[; <" T2CON equ 012h ;# ">
+"794
+[; <" SSPBUF equ 013h ;# ">
+"801
+[; <" SSPCON equ 014h ;# ">
+"871
+[; <" CCPR1 equ 015h ;# ">
+"878
+[; <" CCPR1L equ 015h ;# ">
+"885
+[; <" CCPR1H equ 016h ;# ">
+"892
+[; <" CCP1CON equ 017h ;# ">
+"950
+[; <" RCSTA equ 018h ;# ">
+"1045
+[; <" TXREG equ 019h ;# ">
+"1052
+[; <" RCREG equ 01Ah ;# ">
+"1059
+[; <" CCPR2 equ 01Bh ;# ">
+"1066
+[; <" CCPR2L equ 01Bh ;# ">
+"1073
+[; <" CCPR2H equ 01Ch ;# ">
+"1080
+[; <" CCP2CON equ 01Dh ;# ">
+"1138
+[; <" ADRESH equ 01Eh ;# ">
+"1145
+[; <" ADCON0 equ 01Fh ;# ">
+"1241
+[; <" OPTION_REG equ 081h ;# ">
+"1311
+[; <" TRISA equ 085h ;# ">
+"1361
+[; <" TRISB equ 086h ;# ">
+"1423
+[; <" TRISC equ 087h ;# ">
+"1485
+[; <" TRISD equ 088h ;# ">
+"1547
+[; <" TRISE equ 089h ;# ">
+"1604
+[; <" PIE1 equ 08Ch ;# ">
+"1666
+[; <" PIE2 equ 08Dh ;# ">
+"1706
+[; <" PCON equ 08Eh ;# ">
+"1740
+[; <" SSPCON2 equ 091h ;# ">
+"1802
+[; <" PR2 equ 092h ;# ">
+"1809
+[; <" SSPADD equ 093h ;# ">
+"1816
+[; <" SSPSTAT equ 094h ;# ">
+"1985
+[; <" TXSTA equ 098h ;# ">
+"2066
+[; <" SPBRG equ 099h ;# ">
+"2073
+[; <" CMCON equ 09Ch ;# ">
+"2143
+[; <" CVRCON equ 09Dh ;# ">
+"2208
+[; <" ADRESL equ 09Eh ;# ">
+"2215
+[; <" ADCON1 equ 09Fh ;# ">
+"2274
+[; <" EEDATA equ 010Ch ;# ">
+"2281
+[; <" EEADR equ 010Dh ;# ">
+"2288
+[; <" EEDATH equ 010Eh ;# ">
+"2295
+[; <" EEADRH equ 010Fh ;# ">
+"2302
+[; <" EECON1 equ 018Ch ;# ">
+"2347
+[; <" EECON2 equ 018Dh ;# ">
+"21 kent.c
+[p x FOSC  =  HS   WDTE  =  OFF   PWRTE  =  ON   BOREN  =  ON   LVP  =  OFF   CPD  =  OFF   WRT  =  OFF   CP  =  OFF ]
+"97
+[v _sensor_min `us ~T0 @X0 -> 8 `i e ]
+[v _sensor_max `us ~T0 @X0 -> 8 `i e ]
+"100
+[v _ee_min `Eus ~T0 @X0 -> 8 `i e ]
+"101
+[v _ee_max `Eus ~T0 @X0 -> 8 `i e ]
+"102
+[v _ee_magic `Euc ~T0 @X0 1 e ]
+"105
+[v _last_known_error `s ~T0 @X0 1 e ]
+[i _last_known_error
+-> -> 0 `i `s
+]
+"106
+[v _last_error `s ~T0 @X0 1 e ]
+[i _last_error
+-> -> 0 `i `s
+]
+"107
+[v _smooth_error `s ~T0 @X0 1 e ]
+[i _smooth_error
+-> -> 0 `i `s
+]
+"108
+[v _integral `s ~T0 @X0 1 e ]
+[i _integral
+-> -> 0 `i `s
+]
+"110
+[v _last_turn_dir `c ~T0 @X0 1 e ]
+[i _last_turn_dir
+-> -> 0 `i `c
+]
+"112
+[v _gap_timer `us ~T0 @X0 1 e ]
+[i _gap_timer
+-> -> 0 `i `us
+]
+"113
+[v _lost_line_time_ms `us ~T0 @X0 1 e ]
+[i _lost_line_time_ms
+-> -> 0 `i `us
+]
+"114
+[v _startup_timer_ms `us ~T0 @X0 1 e ]
+[i _startup_timer_ms
+-> -> 0 `i `us
+]
+"115
+[v _startup_active `uc ~T0 @X0 1 e ]
+[i _startup_active
+-> -> 0 `i `uc
+]
+"116
+[v _first_line_seen `uc ~T0 @X0 1 e ]
+[i _first_line_seen
+-> -> 0 `i `uc
+]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"130
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"131
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 10 `i 100  ]
+[e $U 101  ]
+[e :U 100 ]
+{
+"132
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"133
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 10 `i 100  ]
+[e :U 101 ]
+}
+"135
+[e ( _init_hardware ..  ]
+"136
+[e ( _load_cal_from_eeprom ..  ]
+"137
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"139
+[e :U 104 ]
+{
+"140
+[e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
+"142
+[e = _gap_timer -> -> 0 `i `us ]
+"143
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"144
+[e = _startup_timer_ms -> -> 0 `i `us ]
+"145
+[e = _startup_active -> -> 0 `i `uc ]
+"146
+[e = _first_line_seen -> -> 0 `i `uc ]
+"148
+[e = _last_known_error -> -> 0 `i `s ]
+"149
+[e = _last_error -> -> 0 `i `s ]
+"150
+[e = _smooth_error -> -> 0 `i `s ]
+"151
+[e = _integral -> -> 0 `i `s ]
+"152
+[e = _last_turn_dir -> -> 0 `i `c ]
+"154
+[e = _RD2 -> -> 1 `i `b ]
+"156
+[v _btn `E1034 ~T0 @X0 1 a ]
+[e = _btn ( _check_button ..  ]
+"158
+[e $ ! == -> _btn `ui -> . `E1034 2 `ui 106  ]
+{
+"159
+[e ( _calibrate_sensors ..  ]
+"160
+[e ( _save_cal_to_eeprom ..  ]
+"162
+[e = _RD2 -> -> 1 `i `b ]
+"163
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"164
+[e = _RD2 -> -> 0 `i `b ]
+"165
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"166
+[e = _RD2 -> -> 1 `i `b ]
+"167
+}
+[e $U 107  ]
+"169
+[e :U 106 ]
+[e $ ! == -> _btn `ui -> . `E1034 1 `ui 108  ]
+{
+"170
+[e = _RD2 -> -> 0 `i `b ]
+"177
+[e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
+"178
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"183
+[e = _gap_timer -> -> 0 `i `us ]
+"184
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"185
+[e = _startup_timer_ms -> -> 0 `i `us ]
+"186
+[e = _startup_active -> -> 1 `i `uc ]
+"187
+[e = _first_line_seen -> -> 0 `i `uc ]
+"189
+[e = _last_known_error -> -> 0 `i `s ]
+"190
+[e = _last_error -> -> 0 `i `s ]
+"191
+[e = _smooth_error -> -> 0 `i `s ]
+"192
+[e = _integral -> -> 0 `i `s ]
+"193
+[e = _last_turn_dir -> -> 0 `i `c ]
+"195
+[e :U 110 ]
+{
+"196
+[e $ ! == -> _RB0 `i -> 1 `i 112  ]
+{
+"197
+[e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
+"198
+[e $U 113  ]
+[e :U 114 ]
+[e :U 113 ]
+[e $ == -> _RB0 `i -> 1 `i 114  ]
+[e :U 115 ]
+"199
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"200
+[e $U 111  ]
+"201
+}
+[e :U 112 ]
+"203
+[v _sum_weights `l ~T0 @X0 1 a ]
+[e = _sum_weights -> -> 0 `i `l ]
+"204
+[v _sum_vals `l ~T0 @X0 1 a ]
+[e = _sum_vals -> -> 0 `i `l ]
+"205
+[v _active_sensors `uc ~T0 @X0 1 a ]
+[e = _active_sensors -> -> 0 `i `uc ]
+[v F1046 `uc ~T0 @X0 -> 8 `i s ]
+[i F1046
+:U ..
+"207
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+[v _s_active `uc ~T0 @X0 -> 8 `i a ]
+[e = _s_active F1046 ]
+"209
+[v _left_edge_seen `uc ~T0 @X0 1 a ]
+[e = _left_edge_seen -> -> 0 `i `uc ]
+"210
+[v _right_edge_seen `uc ~T0 @X0 1 a ]
+[e = _right_edge_seen -> -> 0 `i `uc ]
+"211
+[v _center_seen `uc ~T0 @X0 1 a ]
+[e = _center_seen -> -> 0 `i `uc ]
+"213
+[v F1051 `Cs ~T0 @X0 -> 8 `i s weights ]
+[i F1051
+:U ..
+-> -U -> 70 `i `s
+-> -U -> 50 `i `s
+-> -U -> 30 `i `s
+-> -U -> 10 `i `s
+-> -> 10 `i `s
+-> -> 30 `i `s
+-> -> 50 `i `s
+-> -> 70 `i `s
+..
+]
+"215
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 116  ]
+[e $U 117  ]
+[e :U 116 ]
+{
+"216
+[v _raw_val `us ~T0 @X0 1 a ]
+[e = _raw_val ( _read_adc (1 _i ]
+"218
+[v _range `l ~T0 @X0 1 a ]
+[e = _range - -> *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux `l -> *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux `l ]
+"220
+[e $ ! < _range -> -> 100 `i `l 119  ]
+{
+"221
+[e $U 118  ]
+"222
+}
+[e :U 119 ]
+"224
+[v _normalized `l ~T0 @X0 1 a ]
+[e = _normalized / * - -> _raw_val `l -> *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux `l -> -> 1000 `i `l _range ]
+"226
+[e $ ! < _normalized -> -> 0 `i `l 120  ]
+{
+"227
+[e = _normalized -> -> 0 `i `l ]
+"228
+}
+[e :U 120 ]
+"230
+[e $ ! > _normalized -> -> 1000 `i `l 121  ]
+{
+"231
+[e = _normalized -> -> 1000 `i `l ]
+"232
+}
+[e :U 121 ]
+"234
+[e $ ! > _normalized -> -> 200 `i `l 122  ]
+{
+"235
+[e = *U + &U _s_active * -> _i `ux -> -> # *U &U _s_active `ui `ux -> -> 1 `i `uc ]
+"237
+[e =+ _sum_weights * _normalized -> *U + &U F1051 * -> _i `ux -> -> # *U &U F1051 `ui `ux `l ]
+"238
+[e =+ _sum_vals _normalized ]
+"239
+[e ++ _active_sensors -> -> 1 `i `uc ]
+"241
+[e $ ! <= -> _i `i -> 1 `i 123  ]
+{
+"242
+[e = _left_edge_seen -> -> 1 `i `uc ]
+"243
+}
+[e :U 123 ]
+"245
+[e $ ! >= -> _i `i -> 6 `i 124  ]
+{
+"246
+[e = _right_edge_seen -> -> 1 `i `uc ]
+"247
+}
+[e :U 124 ]
+"249
+[e $ ! && >= -> _i `i -> 2 `i <= -> _i `i -> 5 `i 125  ]
+{
+"250
+[e = _center_seen -> -> 1 `i `uc ]
+"251
+}
+[e :U 125 ]
+"252
+}
+[e :U 122 ]
+"253
+}
+[e :U 118 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 116  ]
+[e :U 117 ]
+}
+"264
+[e $ ! != -> _startup_active `i -> 0 `i 126  ]
+{
+"265
+[e $ ! > _sum_vals -> -> 800 `i `l 127  ]
+{
+"266
+[v _startup_error `s ~T0 @X0 1 a ]
+[e = _startup_error -> / _sum_weights _sum_vals `s ]
+"268
+[e = _smooth_error _startup_error ]
+"269
+[e = _last_error _startup_error ]
+"270
+[e = _last_known_error _startup_error ]
+"272
+[e $ ! < -> _startup_error `i -U -> 14 `i 128  ]
+{
+"273
+[e = _last_turn_dir -> -U -> 1 `i `c ]
+"274
+}
+[e $U 129  ]
+"275
+[e :U 128 ]
+[e $ ! > -> _startup_error `i -> 14 `i 130  ]
+{
+"276
+[e = _last_turn_dir -> -> 1 `i `c ]
+"277
+}
+[e $U 131  ]
+"278
+[e :U 130 ]
+{
+"279
+[e = _last_turn_dir -> -> 0 `i `c ]
+"280
+}
+[e :U 131 ]
+[e :U 129 ]
+"282
+[e = _first_line_seen -> -> 1 `i `uc ]
+"288
+[e $ ! < -> _startup_timer_ms `ui -> -> 120 `i `ui 132  ]
+{
+"289
+[e ( _set_motors (2 , -> -> 22 `i `s -> -> 22 `i `s ]
+"290
+}
+[e $U 133  ]
+"291
+[e :U 132 ]
+[e $ ! < -> _startup_timer_ms `ui -> -> 240 `i `ui 134  ]
+{
+"292
+[e ( _set_motors (2 , -> -> 35 `i `s -> -> 35 `i `s ]
+"293
+}
+[e $U 135  ]
+"294
+[e :U 134 ]
+{
+"295
+[e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
+"296
+}
+[e :U 135 ]
+[e :U 133 ]
+"297
+}
+[e $U 136  ]
+"298
+[e :U 127 ]
+{
+"303
+[e ( _set_motors (2 , -> -> 22 `i `s -> -> 22 `i `s ]
+"304
+}
+[e :U 136 ]
+"306
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"307
+[e =+ _startup_timer_ms -> -> 10 `i `us ]
+"309
+[e $ ! && >= -> _startup_timer_ms `ui -> -> 350 `i `ui != -> _first_line_seen `i -> 0 `i 137  ]
+{
+"310
+[e = _startup_active -> -> 0 `i `uc ]
+"311
+[e = _gap_timer -> -> 0 `i `us ]
+"312
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"313
+}
+[e :U 137 ]
+"319
+[e $ ! && >= -> _startup_timer_ms `ui -> -> 800 `i `ui ! != -> _first_line_seen `i -> 0 `i 138  ]
+{
+"320
+[e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
+"321
+[e $U 111  ]
+"322
+}
+[e :U 138 ]
+"324
+[e $U 109  ]
+"325
+}
+[e :U 126 ]
+"333
+[v _hard_left_turn `uc ~T0 @X0 1 a ]
+[e = _hard_left_turn -> -> 0 `i `uc ]
+"334
+[v _hard_right_turn `uc ~T0 @X0 1 a ]
+[e = _hard_right_turn -> -> 0 `i `uc ]
+"336
+[e $ ! && && || != -> *U + &U _s_active * -> -> -> 0 `i `ui `ux -> -> # *U &U _s_active `ui `ux `i -> 0 `i != -> *U + &U _s_active * -> -> -> 1 `i `ui `ux -> -> # *U &U _s_active `ui `ux `i -> 0 `i ! != -> _center_seen `i -> 0 `i ! != -> _right_edge_seen `i -> 0 `i 139  ]
+{
+"337
+[e = _hard_left_turn -> -> 1 `i `uc ]
+"338
+}
+[e :U 139 ]
+"340
+[e $ ! && && || != -> *U + &U _s_active * -> -> -> 6 `i `ui `ux -> -> # *U &U _s_active `ui `ux `i -> 0 `i != -> *U + &U _s_active * -> -> -> 7 `i `ui `ux -> -> # *U &U _s_active `ui `ux `i -> 0 `i ! != -> _center_seen `i -> 0 `i ! != -> _left_edge_seen `i -> 0 `i 140  ]
+{
+"341
+[e = _hard_right_turn -> -> 1 `i `uc ]
+"342
+}
+[e :U 140 ]
+"344
+[e $ ! != -> _hard_left_turn `i -> 0 `i 141  ]
+{
+"345
+[e = _RD2 -> -> 1 `i `b ]
+"347
+[e = _gap_timer -> -> 0 `i `us ]
+"348
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"350
+[e = _last_turn_dir -> -U -> 1 `i `c ]
+"351
+[e = _last_known_error -> -U -> 70 `i `s ]
+"352
+[e = _last_error -> -U -> 70 `i `s ]
+"353
+[e = _smooth_error -> -U -> 70 `i `s ]
+"354
+[e = _integral -> -> 0 `i `s ]
+"356
+[e ( _set_motors (2 , -> -U -> 86 `i `s -> -> 86 `i `s ]
+"357
+[e ( __delay (1 -> * -> -> 42 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"358
+}
+[e $U 142  ]
+"360
+[e :U 141 ]
+[e $ ! != -> _hard_right_turn `i -> 0 `i 143  ]
+{
+"361
+[e = _RD2 -> -> 1 `i `b ]
+"363
+[e = _gap_timer -> -> 0 `i `us ]
+"364
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"366
+[e = _last_turn_dir -> -> 1 `i `c ]
+"367
+[e = _last_known_error -> -> 70 `i `s ]
+"368
+[e = _last_error -> -> 70 `i `s ]
+"369
+[e = _smooth_error -> -> 70 `i `s ]
+"370
+[e = _integral -> -> 0 `i `s ]
+"372
+[e ( _set_motors (2 , -> -> 82 `i `s -> -U -> 82 `i `s ]
+"373
+[e ( __delay (1 -> * -> -> 35 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"374
+}
+[e $U 144  ]
+"379
+[e :U 143 ]
+[e $ ! >= -> _active_sensors `i -> 7 `i 145  ]
+{
+"380
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"381
+[e = _integral -> -> 0 `i `s ]
+"383
+[e $ ! || == -> _last_turn_dir `i -U -> 1 `i < -> _last_known_error `i -U -> 12 `i 146  ]
+{
+"384
+[e ( _set_motors (2 , -> -U -> 86 `i `s -> -> 86 `i `s ]
+"385
+}
+[e $U 147  ]
+"386
+[e :U 146 ]
+[e $ ! || == -> _last_turn_dir `i -> 1 `i > -> _last_known_error `i -> 12 `i 148  ]
+{
+"387
+[e ( _set_motors (2 , -> -> 82 `i `s -> -U -> 82 `i `s ]
+"388
+}
+[e $U 149  ]
+"389
+[e :U 148 ]
+{
+"390
+[e ( _set_motors (2 , -> -> 45 `i `s -> -> 45 `i `s ]
+"391
+}
+[e :U 149 ]
+[e :U 147 ]
+"393
+[e ( __delay (1 -> * -> -> 25 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"394
+}
+[e $U 150  ]
+"399
+[e :U 145 ]
+[e $ ! > _sum_vals -> -> 800 `i `l 151  ]
+{
+"400
+[e = _RD2 -> -> 1 `i `b ]
+"402
+[e = _gap_timer -> -> 0 `i `us ]
+"403
+[e = _lost_line_time_ms -> -> 0 `i `us ]
+"405
+[v _raw_error `s ~T0 @X0 1 a ]
+[e = _raw_error -> / _sum_weights _sum_vals `s ]
+"410
+[e = _smooth_error -> / + * -> _smooth_error `i -> 3 `i -> _raw_error `i -> 4 `i `s ]
+"412
+[v _error `s ~T0 @X0 1 a ]
+[e = _error _smooth_error ]
+"413
+[v _abs_error `s ~T0 @X0 1 a ]
+[e = _abs_error -> ? < -> _error `i -> 0 `i : -U -> _error `i -> _error `i `s ]
+"415
+[e =+ _integral -> _error `s ]
+"416
+[e = _integral ( _clamp_int16 (3 , , _integral -> -U -> 120 `i `s -> -> 120 `i `s ]
+"418
+[v _derivative `s ~T0 @X0 1 a ]
+[e = _derivative -> - -> _error `i -> _last_error `i `s ]
+"419
+[e = _last_error _error ]
+"421
+[v _correction `s ~T0 @X0 1 a ]
+[e = _correction -> / + + * -> -> 6 `i `l -> _error `l * -> -> 14 `i `l -> _derivative `l * -> -> 0 `i `l -> _integral `l -> -> 10 `i `l `s ]
+"425
+[e = _correction ( _clamp_int16 (3 , , _correction -> -U -> 65 `i `s -> -> 65 `i `s ]
+"427
+[e $ ! < -> _error `i -U -> 14 `i 152  ]
+{
+"428
+[e = _last_turn_dir -> -U -> 1 `i `c ]
+"429
+}
+[e $U 153  ]
+"430
+[e :U 152 ]
+[e $ ! > -> _error `i -> 14 `i 154  ]
+{
+"431
+[e = _last_turn_dir -> -> 1 `i `c ]
+"432
+}
+[e :U 154 ]
+[e :U 153 ]
+"434
+[e = _last_known_error _error ]
+"436
+[v _left_speed `s ~T0 @X0 1 a ]
+[e = _left_speed -> + -> 45 `i -> _correction `i `s ]
+"437
+[v _right_speed `s ~T0 @X0 1 a ]
+[e = _right_speed -> - -> 45 `i -> _correction `i `s ]
+"442
+[e $ ! < -> _abs_error `i -> 15 `i 155  ]
+{
+"443
+[e = _left_speed -> -> 45 `i `s ]
+"444
+[e = _right_speed -> -> 45 `i `s ]
+"445
+}
+[e $U 156  ]
+"451
+[e :U 155 ]
+[e $ ! < -> _abs_error `i -> 52 `i 157  ]
+{
+"452
+[e $ ! < -> _left_speed `i -> 0 `i 158  ]
+{
+"453
+[e = _left_speed -> -> 0 `i `s ]
+"454
+}
+[e :U 158 ]
+"456
+[e $ ! < -> _right_speed `i -> 0 `i 159  ]
+{
+"457
+[e = _right_speed -> -> 0 `i `s ]
+"458
+}
+[e :U 159 ]
+"459
+}
+[e $U 160  ]
+"465
+[e :U 157 ]
+{
+"466
+[e $ ! < -> _error `i -> 0 `i 161  ]
+{
+"467
+[e = _left_speed -> -> 0 `i `s ]
+"468
+[e = _right_speed -> + -> 45 `i -> 18 `i `s ]
+"469
+}
+[e $U 162  ]
+"470
+[e :U 161 ]
+{
+"471
+[e = _left_speed -> + -> 45 `i -> 18 `i `s ]
+"472
+[e = _right_speed -> -> 0 `i `s ]
+"473
+}
+[e :U 162 ]
+"474
+}
+[e :U 160 ]
+[e :U 156 ]
+"476
+[e = _left_speed ( _clamp_int16 (3 , , _left_speed -> -U -> 70 `i `s -> -> 105 `i `s ]
+"477
+[e = _right_speed ( _clamp_int16 (3 , , _right_speed -> -U -> 70 `i `s -> -> 105 `i `s ]
+"479
+[e ( _set_motors (2 , _left_speed _right_speed ]
+"480
+}
+[e $U 163  ]
+"485
+[e :U 151 ]
+{
+"486
+[e = _RD2 -> -> 0 `i `b ]
+"488
+[e $ ! >= -> _lost_line_time_ms `ui -> -> 2000 `i `ui 164  ]
+{
+"489
+[e ( _set_motors (2 , -> -> 0 `i `s -> -> 0 `i `s ]
+"490
+[e $U 111  ]
+"491
+}
+[e :U 164 ]
+"493
+[e ++ _gap_timer -> -> 1 `i `us ]
+"500
+[e $ ! <= -> _gap_timer `ui -> -> 14 `i `ui 165  ]
+{
+"501
+[e ( _set_motors (2 , -> -> 34 `i `s -> -> 34 `i `s ]
+"502
+[e ( __delay (1 -> * -> -> 4 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"503
+[e =+ _lost_line_time_ms -> -> 4 `i `us ]
+"504
+}
+[e $U 166  ]
+"513
+[e :U 165 ]
+[e $ ! <= -> _gap_timer `ui -> + -> 14 `i -> 80 `i `ui 167  ]
+{
+"514
+[e = _integral -> -> 0 `i `s ]
+"516
+[e $ ! || == -> _last_turn_dir `i -U -> 1 `i < -> _last_known_error `i -U -> 8 `i 168  ]
+{
+"521
+[e ( _set_motors (2 , -> -> 18 `i `s -> -> 62 `i `s ]
+"522
+}
+[e $U 169  ]
+"523
+[e :U 168 ]
+[e $ ! || == -> _last_turn_dir `i -> 1 `i > -> _last_known_error `i -> 8 `i 170  ]
+{
+"528
+[e ( _set_motors (2 , -> -> 58 `i `s -> -> 18 `i `s ]
+"529
+}
+[e $U 171  ]
+"530
+[e :U 170 ]
+{
+"535
+[e ( _set_motors (2 , -> -> 18 `i `s -> -> 18 `i `s ]
+"536
+}
+[e :U 171 ]
+[e :U 169 ]
+"538
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"539
+[e =+ _lost_line_time_ms -> -> 5 `i `us ]
+"540
+}
+[e $U 172  ]
+"546
+[e :U 167 ]
+{
+"547
+[e ( _set_motors (2 , -> -> 16 `i `s -> -> 16 `i `s ]
+"548
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"549
+[e =+ _lost_line_time_ms -> -> 5 `i `us ]
+"550
+}
+[e :U 172 ]
+[e :U 166 ]
+"551
+}
+[e :U 163 ]
+[e :U 150 ]
+[e :U 144 ]
+[e :U 142 ]
+"553
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
+"554
+}
+[e :U 109 ]
+[e $U 110  ]
+[e :U 111 ]
+"555
+}
+[e :U 108 ]
+[e :U 107 ]
+"556
+}
+[e :U 103 ]
+[e $U 104  ]
+[e :U 105 ]
+"557
+[e :UE 99 ]
+}
+"559
+[v _init_hardware `(v ~T0 @X0 1 ef ]
+{
+[e :U _init_hardware ]
+[f ]
+"560
+[e = _PORTC -> -> 255 `i `uc ]
+"562
+[e = _TRISA -> -> 255 `i `uc ]
+"563
+[e = _TRISE -> -> 7 `i `uc ]
+"564
+[e = _TRISB -> -> 193 `i `uc ]
+"565
+[e = _TRISC -> -> 0 `i `uc ]
+"566
+[e = _TRISD -> -> 0 `i `uc ]
+"568
+[e = _ADCON1 -> -> 128 `i `uc ]
+"569
+[e = _ADCON0 -> -> 129 `i `uc ]
+"571
+[e = _PR2 -> -> 255 `i `uc ]
+"572
+[e = _CCP1CON -> -> 12 `i `uc ]
+"573
+[e = _CCP2CON -> -> 12 `i `uc ]
+"574
+[e = _T2CON -> -> 4 `i `uc ]
+"576
+[e = _CCPR1L -> -> 255 `i `uc ]
+"577
+[e = _CCPR2L -> -> 255 `i `uc ]
+"578
+[e :UE 173 ]
+}
+"580
+[v _calibrate_sensors `(v ~T0 @X0 1 ef ]
+{
+[e :U _calibrate_sensors ]
+[f ]
+"581
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 175  ]
+[e $U 176  ]
+[e :U 175 ]
+{
+"582
+[e = *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux -> -> 1023 `i `us ]
+"583
+[e = *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux -> -> 0 `i `us ]
+"584
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 175  ]
+[e :U 176 ]
+}
+"586
+{
+[v _t `us ~T0 @X0 1 a ]
+[e = _t -> -> 0 `i `us ]
+[e $ < -> _t `ui -> -> 400 `i `ui 178  ]
+[e $U 179  ]
+[e :U 178 ]
+{
+"587
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 181  ]
+[e $U 182  ]
+[e :U 181 ]
+{
+"588
+[v _val `us ~T0 @X0 1 a ]
+[e = _val ( _read_adc (1 _i ]
+"590
+[e $ ! < -> _val `ui -> *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux `ui 184  ]
+{
+"591
+[e = *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux _val ]
+"592
+}
+[e :U 184 ]
+"594
+[e $ ! > -> _val `ui -> *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux `ui 185  ]
+{
+"595
+[e = *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux _val ]
+"596
+}
+[e :U 185 ]
+"597
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 181  ]
+[e :U 182 ]
+}
+"599
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"601
+[e $ ! == % -> _t `ui -> -> 5 `i `ui -> -> 0 `i `ui 186  ]
+{
+"602
+[e = _RD2 ! _RD2 ]
+"603
+}
+[e :U 186 ]
+"604
+}
+[e ++ _t -> -> 1 `i `us ]
+[e $ < -> _t `ui -> -> 400 `i `ui 178  ]
+[e :U 179 ]
+}
+"605
+[e :UE 174 ]
+}
+"607
+[v _save_cal_to_eeprom `(v ~T0 @X0 1 ef ]
+{
+[e :U _save_cal_to_eeprom ]
+[f ]
+"608
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 188  ]
+[e $U 189  ]
+[e :U 188 ]
+{
+"609
+[e = *U + &U _ee_min * -> _i `ux -> -> # *U &U _ee_min `ui `ux *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux ]
+"610
+[e = *U + &U _ee_max * -> _i `ux -> -> # *U &U _ee_max `ui `ux *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux ]
+"611
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 188  ]
+[e :U 189 ]
+}
+"613
+[e = _ee_magic -> -> 165 `i `uc ]
+"614
+[e :UE 187 ]
+}
+"616
+[v _load_cal_from_eeprom `(v ~T0 @X0 1 ef ]
+{
+[e :U _load_cal_from_eeprom ]
+[f ]
+"617
+[e $ ! == -> _ee_magic `i -> 165 `i 192  ]
+{
+"618
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 193  ]
+[e $U 194  ]
+[e :U 193 ]
+{
+"619
+[e = *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux *U + &U _ee_min * -> _i `ux -> -> # *U &U _ee_min `ui `ux ]
+"620
+[e = *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux *U + &U _ee_max * -> _i `ux -> -> # *U &U _ee_max `ui `ux ]
+"621
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 193  ]
+[e :U 194 ]
+}
+"622
+}
+[e $U 196  ]
+"623
+[e :U 192 ]
+{
+"624
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 197  ]
+[e $U 198  ]
+[e :U 197 ]
+{
+"625
+[e = *U + &U _sensor_min * -> _i `ux -> -> # *U &U _sensor_min `ui `ux -> -> 0 `i `us ]
+"626
+[e = *U + &U _sensor_max * -> _i `ux -> -> # *U &U _sensor_max `ui `ux -> -> 1023 `i `us ]
+"627
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 197  ]
+[e :U 198 ]
+}
+"628
+}
+[e :U 196 ]
+"629
+[e :UE 191 ]
+}
+"631
+[v _check_button `(E1034 ~T0 @X0 1 ef ]
+{
+[e :U _check_button ]
+[f ]
+"632
+[e $ ! == -> _RB0 `i -> 0 `i 201  ]
+{
+"633
+[e ) . `E1034 0 ]
+[e $UE 200  ]
+"634
+}
+[e :U 201 ]
+"636
+[v _press_time `us ~T0 @X0 1 a ]
+[e = _press_time -> -> 0 `i `us ]
+"638
+[e $U 202  ]
+[e :U 203 ]
+{
+"639
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"640
+[e =+ _press_time -> -> 10 `i `us ]
+"642
+[e $ ! > -> _press_time `ui -> -> 3000 `i `ui 205  ]
+{
+"643
+[e = _RD2 != % / -> _press_time `ui -> -> 100 `i `ui -> -> 2 `i `ui -> -> 0 `i `ui ]
+"644
+}
+[e :U 205 ]
+"645
+}
+[e :U 202 ]
+"638
+[e $ == -> _RB0 `i -> 1 `i 203  ]
+[e :U 204 ]
+"647
+[e $ ! > -> _press_time `ui -> -> 3000 `i `ui 206  ]
+{
+"648
+[e ) . `E1034 2 ]
+[e $UE 200  ]
+"649
+}
+[e :U 206 ]
+"651
+[e $ ! > -> _press_time `ui -> -> 50 `i `ui 207  ]
+{
+"652
+[e ) . `E1034 1 ]
+[e $UE 200  ]
+"653
+}
+[e :U 207 ]
+"655
+[e ) . `E1034 0 ]
+[e $UE 200  ]
+"656
+[e :UE 200 ]
+}
+"658
+[v _read_adc `(us ~T0 @X0 1 ef1`uc ]
+{
+[e :U _read_adc ]
+[v _channel `uc ~T0 @X0 1 r1 ]
+[f ]
+"659
+[e =& _ADCON0 -> -> 199 `i `Vuc ]
+"660
+[e =| _ADCON0 -> << -> _channel `i -> 3 `i `Vuc ]
+"662
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
+"664
+[e = _GO_nDONE -> -> 1 `i `b ]
+"666
+[e $U 209  ]
+[e :U 210 ]
+[e :U 209 ]
+[e $ _GO_nDONE 210  ]
+[e :U 211 ]
+"668
+[e ) -> | << -> _ADRESH `i -> 8 `i -> _ADRESL `i `us ]
+[e $UE 208  ]
+"669
+[e :UE 208 ]
+}
+"671
+[v _clamp_int16 `(s ~T0 @X0 1 ef3`s`s`s ]
+{
+[e :U _clamp_int16 ]
+[v _value `s ~T0 @X0 1 r1 ]
+[v _min_val `s ~T0 @X0 1 r2 ]
+[v _max_val `s ~T0 @X0 1 r3 ]
+[f ]
+"672
+[e $ ! < -> _value `i -> _min_val `i 213  ]
+{
+"673
+[e ) _min_val ]
+[e $UE 212  ]
+"674
+}
+[e :U 213 ]
+"676
+[e $ ! > -> _value `i -> _max_val `i 214  ]
+{
+"677
+[e ) _max_val ]
+[e $UE 212  ]
+"678
+}
+[e :U 214 ]
+"680
+[e ) _value ]
+[e $UE 212  ]
+"681
+[e :UE 212 ]
+}
+"683
+[v _set_motors `(v ~T0 @X0 1 ef2`s`s ]
+{
+[e :U _set_motors ]
+[v _left_pwm `s ~T0 @X0 1 r1 ]
+[v _right_pwm `s ~T0 @X0 1 r2 ]
+[f ]
+"684
+[e $ ! >= -> _left_pwm `i -> 0 `i 216  ]
+{
+"685
+[e = _RC0 -> -> 1 `i `b ]
+"687
+[e $ ! > -> _left_pwm `i -> 150 `i 217  ]
+{
+"688
+[e = _left_pwm -> -> 150 `i `s ]
+"689
+}
+[e :U 217 ]
+"691
+[e = _CCPR1L -> - -> 255 `i -> _left_pwm `i `uc ]
+"692
+}
+[e $U 218  ]
+"693
+[e :U 216 ]
+{
+"694
+[e = _RC0 -> -> 0 `i `b ]
+"695
+[e = _left_pwm -> -U -> _left_pwm `i `s ]
+"697
+[e $ ! > -> _left_pwm `i -> 150 `i 219  ]
+{
+"698
+[e = _left_pwm -> -> 150 `i `s ]
+"699
+}
+[e :U 219 ]
+"701
+[e = _CCPR1L -> _left_pwm `uc ]
+"702
+}
+[e :U 218 ]
+"704
+[e $ ! >= -> _right_pwm `i -> 0 `i 220  ]
+{
+"705
+[e = _RC4 -> -> 1 `i `b ]
+"707
+[e $ ! > -> _right_pwm `i -> 150 `i 221  ]
+{
+"708
+[e = _right_pwm -> -> 150 `i `s ]
+"709
+}
+[e :U 221 ]
+"711
+[e = _CCPR2L -> - -> 255 `i -> _right_pwm `i `uc ]
+"712
+}
+[e $U 222  ]
+"713
+[e :U 220 ]
+{
+"714
+[e = _RC4 -> -> 0 `i `b ]
+"715
+[e = _right_pwm -> -U -> _right_pwm `i `s ]
+"717
+[e $ ! > -> _right_pwm `i -> 150 `i 223  ]
+{
+"718
+[e = _right_pwm -> -> 150 `i `s ]
+"719
+}
+[e :U 223 ]
+"721
+[e = _CCPR2L -> _right_pwm `uc ]
+"722
+}
+[e :U 222 ]
+"723
+[e :UE 215 ]
+}

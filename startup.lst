@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V3.10 build 20250813170317 
-                                                                                                           Mon May 18 03:41:36 2026
+                                                                                                           Thu May 28 15:12:46 2026
 
 
      1                           	processor	16F877A
@@ -46,7 +46,7 @@ Microchip MPLAB XC8 Assembler V3.10 build 20250813170317
     40                           ; Compiler options:
     41                           ;
     42                           ; -q --opt=none --chip=16f877a --dfp=../PIC16Fxxx_DFP/xc8 -oLF.hex \
-    43                           ; main.c -L--fixupoverflow=error --std=c99 --rors --icl=auto \
+    43                           ; nopid.c -L--fixupoverflow=error --std=c99 --rors --icl=auto \
     44                           ; --callgraph=none --warn=-3 --errformat=%f:%l:%c: error: (%n) %s \
     45                           ; --warnformat=%f:%l:%c: warning: (%n) %s \
     46                           ; --msgformat=%f:%l:%c: advisory: (%n) %s
@@ -70,7 +70,7 @@ Microchip MPLAB XC8 Assembler V3.10 build 20250813170317
     64     0000                     start:
     65                           
     66                           	psect	end_init
-    67     0000  120A  118A  2FB2   	ljmp	start_initialization	;jump to C runtime clear & initialization
+    67     0000  120A  118A  2FF3   	ljmp	start_initialization	;jump to C runtime clear & initialization
     68                           
     69                           	psect	clrtext
     70     0004                     FSR             set	4
@@ -97,10 +97,10 @@ Microchip MPLAB XC8 Assembler V3.10 build 20250813170317
 
 
 Microchip Technology PIC Macro Assembler V3.10 build 20250813170317 
-Symbol Table                                                                                               Mon May 18 03:41:36 2026
+Symbol Table                                                                                               Thu May 28 15:12:46 2026
 
-               ___sp 0000                 _main 0033                 start 0000           ___stack_hi 0000  
-         ___stack_lo 0000       ___int_stack_hi 0000       ___int_stack_lo 0000  start_initialization 07B2  
+               ___sp 0000                 _main 0440                 start 0000           ___stack_hi 0000  
+         ___stack_lo 0000       ___int_stack_hi 0000       ___int_stack_lo 0000  start_initialization 07F3  
           ___heap_hi 0000            ___heap_lo 0000            ___stackhi 0000            ___stacklo 0000  
            ___int_sp 0000             intlevel0 0000             intlevel1 0000             intlevel2 0000  
            intlevel3 0000             intlevel4 0000             intlevel5 0000             reset_vec 0000  

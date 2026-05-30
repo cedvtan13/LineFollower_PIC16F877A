@@ -8,7 +8,7 @@
 	; Compiler options:
 	;
 	; -q --opt=none --chip=16f877a --dfp=../PIC16Fxxx_DFP/xc8 -oLF.hex \
-	; main.c -L--fixupoverflow=error --std=c99 --rors --icl=auto \
+	; nopid.c -L--fixupoverflow=error --std=c99 --rors --icl=auto \
 	; --callgraph=none --warn=-3 --errformat=%f:%l:%c: error: (%n) %s \
 	; --warnformat=%f:%l:%c: warning: (%n) %s \
 	; --msgformat=%f:%l:%c: advisory: (%n) %s

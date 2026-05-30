@@ -1,0 +1,254 @@
+2. Hardware Acquisition and Subsystem Design
+All primary components necessary for the control, sensing, and locomotion subsystems were successfully acquired. The system architecture is divided into the following key modules:
+Processing Unit: A PIC16F877A microcontroller operating with a 20 MHz crystal oscillator (HC-49).
+Sensor Array: An custom 8-channel infrared (IR) reflectance array utilizing 5 mm 940 nm emitters and NPN phototransistors, spaced at 9 mm intervals.
+Motor Control: Two DRV8871 motor driver breakout boards assigned to independent DC gear motors.
+Power Management: A 7.4V Li-Po battery pack regulated by an LM7805 linear voltage regulator to supply a stable 5V to the logic circuits.
+User Interface: A tactile SPST button configured as active-high on RB0, and a standard LED indicator on RD2.
+Hardware Parts:
+Microcontroller & Oscillator
+1× PIC16F877A
+40-pin DIP
+Main microcontroller
+1× 16 MHz Crystal
+HC-49 type
+Used as the high-speed oscillator
+Was scrapped from an old arduino board
+2× 22 pF Ceramic Capacitors
+Load capacitors for the crystal
+1× 10 kΩ Resistor
+Pull-up resistor for MCLR
+Connected to +5V
+2× 100 nF Ceramic Capacitors
+Decoupling capacitors
+Placed near the VDD-VSS pins
+1× 10 µF or 100 µF Electrolytic Capacitor
+Bulk decoupling capacitor on the +5V rail
+Optional but recommended
+IR Sensor Array
+8× IR LEDs
+5 mm, 940 nm
+Used as emitters
+8× IR Phototransistors
+5 mm, NPN type
+Example: TEPT5700 or similar
+8× 47 Ω Resistors
+Current-limiting resistors for each IR LED
+8× 47 kΩ Resistors
+Collector load resistors for each phototransistor
+Sensor circuit repeated 8 times:
+IR LED anode → 47 Ω resistor → +5V
+IR LED cathode → GND
+Phototransistor collector → 47 kΩ resistor → +5V
+Phototransistor emitter → GND
+Collector node → PIC analog input AN0–AN7
+Button & Pull-down Circuit
+1× Tactile Push Button
+Momentary SPST
+Active-high input
+1× 330 Ω Resistor
+Series resistor between button and RB0
+1× 10 kΩ Resistor
+Pull-down resistor from RB0 to GND
+LED Indicator
+1× LED
+3 mm or 5 mm
+Any color
+Connected to RD2
+1× 330 Ω Resistor
+Current-limiting resistor
+Connection: RD2 → resistor → LED → GND
+Motor Drivers
+1× DRV8871 Motor Driver Modules
+One module per motor
+Uses IN1 and IN2 only
+2× DC Gear Motors with Wheels
+Common robot-style motors
+Required for robot movement
+ICSP Programming Header
+1× 5-pin or 6-pin Male Header
+2.54 mm pitch
+Used for PICkit or programmer connection
+Power Supply
+1× 5V Regulator
+Example: LM7805 or buck converter
+Needed if using a battery higher than 5V
+1× Battery Pack
+7.4V Li-Po or 6×AA
+Typical robot power source
+1× Power Switch
+Toggle or slide switch
+Used to turn the robot on and off
+
+
+Below are the **final hardware details and complete pinout** for your PIC16F877A line follower robot, incorporating the specific components you have (A129741CT‑ND, 220 Ω 0805 resistors, DRV8871 modules, etc.) and the most robust sensor configuration we discussed.
+
+---
+
+## 1. Sensor Configuration (per sensor, repeat 8×)
+**IR LED driver:** two 220 Ω 0805 resistors in parallel → **110 Ω**  
+**Phototransistor load:** **10 kΩ** (keeps noise low, still gives a clean 1.5 V–2 V black/white swing)
+
+**Schematic of one sensor module**
+```
++5V ──┬──[ 220Ω (0805) ]──┐
+      │                    ├── IR LED anode (→ cathode → GND)
+      └──[ 220Ω (0805) ]──┘
+
++5V ──[ 10 kΩ ]──┬── PIC analog input (AN0–AN7)
+                  │
+          Phototransistor collector
+                  │
+          Phototransistor emitter ── GND
+```
+- IR LED current ≈ 34.5 mA (safe for standard 5 mm 940 nm LEDs)
+- 8 sensors spaced **9 mm centre‑to‑centre** as required
+- All 8 analog outputs go directly to the microcontroller’s AN0–AN7
+
+---
+
+## 2. PIC16F877A Master Pinout
+
+| Pin | Name   | Function / Connection                                                                                      |
+|-----|--------|------------------------------------------------------------------------------------------------------------|
+| 1   | MCLR   | 10 kΩ pull‑up to +5V; also ICSP MCLR pin                                                                  |
+| 2   | RA0    | **IR Sensor 1** (AN0)                                                                                     |
+| 3   | RA1    | **IR Sensor 2** (AN1)                                                                                     |
+| 4   | RA2    | **IR Sensor 3** (AN2)                                                                                     |
+| 5   | RA3    | **IR Sensor 4** (AN3)                                                                                     |
+| 6   | RA4    | Not used (leave open)                                                                                     |
+| 7   | RA5    | **IR Sensor 5** (AN4)                                                                                     |
+| 8   | RE0    | **IR Sensor 6** (AN5)                                                                                     |
+| 9   | RE1    | **IR Sensor 7** (AN6)                                                                                     |
+| 10  | RE2    | **IR Sensor 8** (AN7)                                                                                     |
+| 11  | VDD    | +5V                                                                                                       |
+| 12  | VSS    | GND                                                                                                       |
+| 13  | OSC1   | 20 MHz crystal + 22 pF to GND                                                                             |
+| 14  | OSC2   | 20 MHz crystal + 22 pF to GND                                                                             |
+| 15  | RC0    | **Left Motor IN2** (direction – digital output)                                                           |
+| 16  | RC1    | **Right Motor IN1** (PWM speed – CCP2 hardware PWM)                                                       |
+| 17  | RC2    | **Left Motor IN1** (PWM speed – CCP1 hardware PWM)                                                        |
+| 18  | RC3    | Not used                                                                                                  |
+| 19  | RD0    | Not used                                                                                                  |
+| 20  | RD1    | Not used                                                                                                  |
+| 21  | RD2    | **LED** : 330 Ω → LED anode → cathode → GND (active high)                                                 |
+| 22  | RD3    | Not used                                                                                                  |
+| 23  | RC4    | **Right Motor IN2** (direction – digital output)                                                          |
+| 24  | RC5    | Not used                                                                                                  |
+| 25  | RC6    | Not used (reserved for UART if needed)                                                                    |
+| 26  | RC7    | Not used                                                                                                  |
+| 27  | RD4    | Not used                                                                                                  |
+| 28  | RD5    | Not used                                                                                                  |
+| 29  | RD6    | Not used                                                                                                  |
+| 30  | RD7    | Not used                                                                                                  |
+| 31  | VSS    | GND                                                                                                       |
+| 32  | VDD    | +5V                                                                                                       |
+| 33  | RB0    | **Button** (active‑high, see circuit below)                                                               |
+| 34  | RB1    | Not used                                                                                                  |
+| 35  | RB2    | Not used                                                                                                  |
+| 36  | RB3    | Not used (leave unconnected for normal operation)                                                         |
+| 37  | RB4    | Not used                                                                                                  |
+| 38  | RB5    | Not used                                                                                                  |
+| 39  | RB6    | ICSP – PGC (programming clock)                                                                            |
+| 40  | RB7    | ICSP – PGD (programming data)                                                                             |
+
+---
+
+## 3. Button Circuit (Active High on RB0)
+
+```
++5V ──[ button ]──[ 330 Ω ]──┬── RB0 (pin 33)
+                             │
+                            [10 kΩ]   (pull‑down)
+                             │
+                            GND
+```
+- Press → RB0 reads ~4.8 V (logic high)
+- 10 kΩ pull‑down ensures solid low when released
+
+---
+
+## 4. LED Indicator (RD2)
+
+```
+RD2 (pin 21) ──[ 330 Ω ]── LED anode ── cathode ── GND
+```
+- LED lights when RD2 is set high
+
+---
+
+## 5. Motor Drivers (2× DRV8871)
+
+| Driver     | Signal | PIC Pin | Function                       |
+|------------|--------|---------|--------------------------------|
+| Left Motor | IN1    | **RC2** | Speed – CCP1 PWM               |
+|            | IN2    | **RC0** | Direction (digital)            |
+| Right Motor| IN1    | **RC1** | Speed – CCP2 PWM               |
+|            | IN2    | **RC4** | Direction (digital)            |
+
+**Logic table for each DRV8871:**
+- **Forward:** IN1 = PWM, IN2 = 0
+- **Reverse:** IN1 = 0, IN2 = PWM
+- **Coast:**  IN1 = 0, IN2 = 0
+- **Brake:**  IN1 = 1, IN2 = 1
+
+No extra interface needed – direct connection from PIC to DRV8871 inputs.
+
+---
+
+## 6. ICSP (Programming Header)
+
+Standard 5‑pin connector (PICkit‑style):
+```
+Pin 1 → MCLR (PIC pin 1)     [with 10kΩ to +5V]
+Pin 2 → VDD (+5V)
+Pin 3 → GND
+Pin 4 → PGD (RB7, pin 40)
+Pin 5 → PGC (RB6, pin 39)
+```
+- Keep RB3/PGM floating (no connection).
+
+---
+
+## 7. Power Supply & Decoupling
+
+- **Regulator:** LM7805 (or a 5 V buck converter) supplied by a 7.4 V Li‑Po or 6×AA battery pack.
+- **Capacitors near regulator:**
+  - Input: 10 µF electrolytic
+  - Output: 10 µF + 100 nF ceramic
+- **At PIC VDD pins (11 & 32):** 100 nF ceramic to GND, placed as close as possible.
+- **Optional bulk:** 100 µF electrolytic on the 5 V rail.
+
+---
+
+## 8. Bill of Materials (Summary)
+
+| Qty | Part                                       | Value / Package      |
+|-----|--------------------------------------------|----------------------|
+| 1   | PIC16F877A                                 | 40‑DIP               |
+| 1   | Crystal                                    | 16 MHz, HC‑49        |
+| 2   | Capacitor ceramic                          | 22 pF                |
+| 1   | Resistor                                   | 10 kΩ (MCLR pull‑up) |
+| 8   | IR LED (5 mm)                              | 940 nm               |
+| 8   | Phototransistor NPN (5 mm)                 | e.g., TEPT5700       |
+| 16  | Resistor 220 Ω 0805 (A129741CT‑ND)         | used as 8 pairs (110 Ω) |
+| 8   | Resistor                                   | 10 kΩ (phototransistor load) |
+| 1   | Tactile push button                        | SPST momentary       |
+| 1   | Resistor 330 Ω (button)                    | any package          |
+| 1   | Resistor 10 kΩ (button pull‑down)          | any package          |
+| 1   | LED (indicator)                            | 3 or 5 mm            |
+| 1   | Resistor 330 Ω (LED)                       | any package          |
+| 2   | DRV8871 motor driver module                | breakout board       |
+| 2   | DC gear motor + wheel                      | as needed            |
+| 1   | 5 V regulator (LM7805 / buck converter)    |                      |
+| 1   | Battery pack (7.4 V Li‑Po / 6×AA)         |                      |
+| 1   | Power switch                               | toggle/slide         |
+|     | Capacitors (decoupling) as per section 7   |                      |
+
+---
+
+## 9. Important Note on 220 Ω 0805 Resistors
+- Power dissipation per resistor: ~0.065 W (< 0.125 W rating) – safe, no overheating.
+- Two in parallel produce a combined 110 Ω, giving exactly the 34.5 mA IR LED current we discussed.
+
+This hardware set‑up gives you a robust, safe, and easy‑to‑assemble line follower. All pins are assigned exactly as per your original specification, and the sensor analog values will provide a wide, clean swing for line detection. If you need the matching test code or PCB layout advice, just let me know.
